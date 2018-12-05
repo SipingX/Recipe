@@ -8,10 +8,10 @@
 	<script type="text/javascript">
 		function loginCheck()
         {
-			var a=new Array(2);
-			a[3]="账号";
-			a[4]="密码";
-			for(var i=0;i<document.loginform.elements.length-1;i++)
+			var a=new Array(4);
+			a[2]="账号";
+			a[3]="密码";
+			for(var i=2;i<document.loginform.elements.length-1;i++)
 			{
 				 if(document.loginform.elements[i].value=="")
 				 {
@@ -145,24 +145,24 @@
 		    
 		            
 					<div class="login_form">
-						<form action="LoginAct" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post"  onSubmit=""><input type="hidden" name="did" value="0"/>
-		               <input type="hidden" name="to" value="log"/>
+						<form action="LoginAct" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post"  onSubmit="return loginCheck();">
+							<input type="hidden" name="did" value="0"/>
+		               		<input type="hidden" name="to" value="log"/>
 		                <div class="uinArea" id="uinArea">
-		                <label class="input-tips" for="u">手机号：</label>
-		                <div class="inputOuter" id="uArea">
-		                    
-		                    <input type="text" id="u" name="userId" class="inputstyle"/>
-		                </div>
+			                <label class="input-tips" for="u">账号：</label>
+			                <div class="inputOuter" id="uArea">
+			                    <input type="text" id="u" name="userId" class="inputstyle"  placeholder="手机号码"/>
+			                </div>
 		                </div>
 		                <div class="pwdArea" id="pwdArea">
-		               <label class="input-tips" for="p">密码：</label> 
-		               <div class="inputOuter" id="pArea">
-		                    
-		                    <input type="password" id="p" name="userPsd" class="inputstyle"/>
+			                <label class="input-tips" for="p">密码：</label> 
+			                <div class="inputOuter" id="pArea">
+			                    <input type="password" id="p" name="userPsd" class="inputstyle"/>
+			                </div>
 		                </div>
+		                <div style="padding-left:50px;margin-top:20px;">
+		                	<input type="submit" value="登 录" style="width:150px;" class="button_blue"/>
 		                </div>
-		               
-		                <div style="padding-left:50px;margin-top:20px;"><input type="submit" value="登 录" style="width:150px;" class="button_blue"/></div>
 		              </form>
 		           </div>
 		           
@@ -175,7 +175,7 @@
 		  <!--注册-->
 		    <div class="qlogin" id="qlogin" style="display: none; ">
 		   
-		    <div class="web_login"><form name="form2" id="regUser" accept-charset="utf-8"  action="" method="post">
+		    <div class="web_login"><form  action="RegisterAct" name="form2" id="regUser" accept-charset="utf-8" method="post">
 			      <input type="hidden" name="to" value="reg"/>
 				      		       <input type="hidden" name="did" value="0"/>
 		        <ul class="reg_form" id="reg-ul">
@@ -183,7 +183,7 @@
 		                <li>
 		                    <label for="user"  class="input-tips2">手机号：</label>
 		                    <div class="inputOuter2">
-		                        <input type="text" id="user" name="user" maxlength="16" class="inputstyle2"/>
+		                        <input type="text" id="user" name="userId" maxlength="16" class="inputstyle2"/>
 		                    </div>
 		                </li>
 										
@@ -204,14 +204,14 @@
 		                <li>
 		                <label for="passwd" class="input-tips2">密码：</label>
 		                    <div class="inputOuter2">
-		                        <input type="password" id="passwd"  name="passwd" maxlength="16" class="inputstyle2"/>
+		                        <input type="password" id="passwd"  name="userPsd" maxlength="16" class="inputstyle2"/>
 		                    </div>
 		                    
 		                </li>
 		                <li>
 		                <label for="passwd2" class="input-tips2">确认密码：</label>
 		                    <div class="inputOuter2">
-		                        <input type="password" id="passwd2" name="" maxlength="16" class="inputstyle2" />
+		                        <input type="password" id="passwd2" name="userPsd_2" maxlength="16" class="inputstyle2" />
 		                    </div>
 		                    
 		                </li>
@@ -219,13 +219,13 @@
 		                
 		                <li>
 		                    <div class="inputArea">
-		                        <input type="button" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="同意协议并注册"/> <a href="#" class="zcxy" target="_blank">注册协议</a>
+		                        <input type="submit" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="同意协议并注册"/> <a href="#" class="zcxy" target="_blank">注册协议</a>
 		                    </div>
 		                    
-		                </li><div class="cl"></div>
-		            </ul></form>
-		           
-		    
+		                </li>
+		                <div class="cl"></div>
+		            </ul>
+	            </form>
 		    </div>
 		   
 		    
