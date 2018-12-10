@@ -4,10 +4,12 @@ public class User {
 	
 	private String id;
 	private String password;
+	private String role;
 	private String name;
 	private String gender;
-	private String age;
+	private int age;
 	private String portrait;
+	private String address;
 	
 	public void setId(String id) {
 		this.id = id;
@@ -21,6 +23,13 @@ public class User {
 	}
 	public String getPassword() {
 		return this.password;
+	}
+	
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public String getRole() {
+		return this.role;
 	}
 	
 	public void setName(String name) {
@@ -37,10 +46,10 @@ public class User {
 		return this.gender;
 	}
 	
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
-	public String getAge() {
+	public int getAge() {
 		return this.age;
 	}
 	
@@ -49,6 +58,13 @@ public class User {
 	}
 	public String getPortrait() {
 		return this.portrait;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getAddress() {
+		return this.address;
 	}
 
 }
