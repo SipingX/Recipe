@@ -13,16 +13,16 @@ import business.UserBusi;
 import entity.User;
 
 /**
- * Servlet implementation class LoginAct
+ * Servlet implementation class RegisterAct
  */
-@WebServlet("/LoginAct")
-public class LoginAct extends HttpServlet {
+@WebServlet("/RegisterAct")
+public class RegisterAct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginAct() {
+    public RegisterAct() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,23 +41,23 @@ public class LoginAct extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
-		
 		User user = new User();
 		UserBusi userbusi = new UserBusi();
 		int rs = 0;
-		
+		String html; 
 		user.setId(request.getParameter("userId").trim());
-		user.setPassword(request.getParameter("userPsd"));
+		user.setPassword(request.getParameter("userPsd").trim());
 		try {
-			rs = userbusi.login(user);
+			rs = userbusi.register(user);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(rs == 1) {
-			response.sendRedirect("index.html");
-		}else {
 			response.sendRedirect("login.html");
+		}else {
+			html="×¢²áÊ§°Ü£¡<br><a href='login.html'>ÖØÐÂ×¢²á</a>";
+			response.getWriter().write(html);
 		}
 	}
 
