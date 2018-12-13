@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="overflow-reset">
+<body>
 
 <!-- Wrapper -->
 <div id="wrapper">
@@ -49,7 +49,7 @@
 <div class="thirteen columns navigation">
 
 	<nav id="navigation" class="menu nav-collapse">
-		<ul>
+<ul>
 			<li>
 				<a href="index.html">主页</a>
 			</li>
@@ -59,7 +59,7 @@
 			</li>
 
 			<li>
-				<a href="original.html">食材</a>
+				<a href="original.html"  id="current">食材</a>
 			</li>
 
 			<li>
@@ -71,7 +71,7 @@
 			</li>
 
 			<li>
-				<a href="submit-recipe.html" id="current">上传食谱</a>
+				<a href="submit-recipe.html">上传食谱</a>
 				<ul>
 					<li><a href="contact.html">联系我们</a></li>
 				</ul>
@@ -93,215 +93,240 @@
 </header>
 
 
-<!-- Titlebar
-================================================== -->
-<section id="titlebar">
-	<!-- Container -->
-	<div class="container">
-
-		<div class="eight columns">
-			<h2>上传食谱</h2>
-		</div>
-
-		<div class="eight columns">
-			<nav id="breadcrumbs">
-				<ul>
-					<li>你在这里:</li>
-					<li><a href="index.html">主页</a></li>
-					<li>上传食谱</li>
-				</ul>
-			</nav>
-		</div>
-
-	</div>
-	<!-- Container / End -->
-</section>
+<!-- Recipe Background -->
+<div class="recipeBackground">
+	<img src="images/recipeBackground.jpg" alt="" />
+</div>
 
 
 <!-- Content
 ================================================== -->
 <div class="container">
-	<div class="sixteen columns">
-		<div class="submit-recipe-form">
 
+	<!-- Masonry -->
+	<div class="twelve columns ">
 
-			<!-- Recipe Title -->
-			<h4>食谱名称</h4>
-			<nav class="title">
-				<input class="search-field" type="text" placeholder="" value=""/>
-			</nav>
-			<div class="clearfix"></div>
+		<!-- Headline -->
+ 		<h3 class="headline">食材分类</h3>
+		<span class="line rb margin-bottom-35"></span>
+		<div class="clearfix"></div>
 
+		<!-- Isotope -->
+		<div class="list-style">
 
-			<div class="margin-top-25"></div>
+			<!-- Recipe #1 -->
+			<div class="four recipe-box columns">
 
+				<!-- Thumbnail -->
+				<div class="thumbnail-holder">
+					<a href="original-page-1.html">
+						<img src="images/recipeThumb-09.jpg" alt=""/>
+						<div class="hover-cover"></div>
+						<div class="hover-icon">查看分类</div>
+					</a>
+				</div>
 
-			<!-- Choose Category -->
-			<div class="select">
-				<h4>选择类别</h4>
-				<select data-placeholder="选择类别" class="chosen-select-no-single">
-						<option value="1">全部</option>
-						<option value="2">早餐</option>
-						<option value="3">午餐</option>
-						<option value="4">饮料</option>
-						<option value="5">小菜</option>
-						<option value="6">汤类</option>
-						<option value="7">代餐沙拉</option>
-						<option value="8">牛肉类</option>
-						<option value="9">禽类</option>
-						<option value="10">豆制品</option>
-						<option value="11">海鲜类</option>
-						<option value="12">全素食</option>
-						<option value="13">蔬菜</option>
-						<option value="14">甜品</option>
-						<option value="15">速食食品</option>
-						<option value="16">面包、蛋糕</option>
-						<option value="17">节日代表</option>
-				</select>
+				<!-- Content -->
+				<div class="recipe-box-content">
+					<h3><a href="original-page-1.html">肉禽类</a></h3>
+
+					<p>此类别以肉禽类为主，介绍了各肉禽类的营养与选购，用户可选择喜欢的烹饪方法。</p>
+
+					<div class="clearfix"></div>
+				</div>
 			</div>
 
+			<!-- Recipe #2 -->
+			<div class="four recipe-box columns">
 
-			<div class="margin-top-25"></div>
+				<!-- Thumbnail -->
+				<div class="thumbnail-holder">
+					<a href="original-page-2.html">
+						<img src="images/yu1.jpg" alt=""/>
+						<div class="hover-cover"></div>
+						<div class="hover-icon">查看分类</div>
+					</a>
+				</div>
 
+				<!-- Content -->
+				<div class="recipe-box-content">
+					<h3><a href="recipe-page-2.html">水产品类</a></h3>
 
-			<!-- Short Summary -->
-			<h4>内容</h4>
-			<textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
+					<p>此类别以水产品类为主，介绍了水产品类的营养与选购，用户可选择喜欢的烹饪方式。</p>
 
+					<div class="clearfix"></div>
+				</div>
+			</div>
 
-			<div class="margin-top-25"></div>
+			<!-- Recipe #3 -->
+			<div class="four recipe-box columns">
 
+				<!-- Thumbnail -->
+				<div class="thumbnail-holder">
+					<a href="original-page-3.html">
+						<img src="images/recipeThumb-01b.jpg" alt=""/>
+						<div class="hover-cover"></div>
+						<div class="hover-icon">查看分类</div>
+					</a>
+				</div>
 
-			<!-- Upload Photos -->
-			<h4>上传照片</h4>
+				<!-- Content -->
+				<div class="recipe-box-content">
+					<h3><a href="original-page-3.html">蔬菜类</a></h3>
 
-			<ul class="recipe-gallery">
-				<li>还没有照片</li>
-			</ul>
+					<p>此类别以蔬菜类为主，介绍了蔬菜类的营养与选购，用户可选择喜欢的烹饪方式。</p>
 
-			<label class="upload-btn">
-			    <input type="file" multiple />
-			    <i class="fa fa-upload"></i> 上传
-			</label>
+					<div class="clearfix"></div>
+				</div>
+			</div>
 
+			<!-- Recipe #4 -->
+			<div class="four recipe-box columns">
 
-			<div class="clearfxix"></div>
-			<div class="margin-top-15"></div>
+				<!-- Thumbnail -->
+				<div class="thumbnail-holder">
+					<a href="original-page-4.html">
+						<img src="images/recipeThumb-04b.jpg" alt=""/>
+						<div class="hover-cover"></div>
+						<div class="hover-icon">查看分类</div>
+					</a>
+				</div>
 
+				<!-- Content -->
+				<div class="recipe-box-content">
+					<h3><a href="original-page-4.html">水果类</a></h3>
 
-			<!-- Ingredients -->
-			<fieldset class="addrecipe-cont" name="ingredients">
-				<h4>配料:</h4>
+					<p>此类别以水果类为主，介绍了水果类的营养与选购，用户可选择喜欢的烹饪方式。</p>
 
-				<table id="ingredients-sort">
+					<div class="clearfix"></div>
+				</div>
+			</div>
 
-					<tr class="ingredients-cont ing">
-						<td class="icon"><i class="fa fa-arrows"></i></td>
-						<td><input name="ingredient_name" tabindex="5" type="text" placeholder="Name of ingredient" /> </td>
-						<td><input name="ingredient_note" tabindex="6" type="text" placeholder="Notes (quantity, additional info)" /></td>
-						<td class="action"><a title="Delete" class="delete" href="#"><i class="fa fa-remove"></i></a> </td>
-					</tr>
+			<!-- Recipe #5 -->
+			<div class="four recipe-box columns">
 
-				</table>
+				<!-- Thumbnail -->
+				<div class="thumbnail-holder">
+					<a href="original-page-5.html">
+						<img src="images/recipeThumb-02b.jpg" alt=""/>
+						<div class="hover-cover"></div>
+						<div class="hover-icon">查看分类</div>
+					</a>
+				</div>
 
-				<a href="#" class="button color add_ingredient">添加新的配料</a>
-			</fieldset>
+				<!-- Content -->
+				<div class="recipe-box-content">
+					<h3><a href="original-page-5.html">甜品类</a></h3>
 
-
-			<div class="margin-top-25"></div>
-
-
-			<!-- Directions -->
-			<h4>具体做法：</h4>
-			<textarea class="WYSIWYG" name="directions" cols="40" rows="3" id="directions" spellcheck="true"></textarea>
-
-
-			<div class="margin-top-25 clearfix"></div>
-
-
-			<!-- Additional Informations -->
-			<h4>更多信息：</h4>
-
-			<fieldset class="additional-info">
-				<table>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="4">口味</label></td>
-					<td><input id="4" type="text" /></td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="1">准备时间</label></td>
-					<td><input id="1" type="text" /></td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="2">烹饪时间</label></td>
-					<td><input id="2" type="text" /></td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="4">烹饪难度</label></td>
-					<td>
-						<select data-placeholder="Choose Level" class="chosen-select-no-single">
-							<option value="1">&nbsp;</option>
-							<option value="2">简单</option>
-							<option value="3">一般</option>
-							<option value="4">困难</option>
-							<option value="5">大师级</option>
-						</select>
-					</td>
-
-				</table>
-			</fieldset>
+					<p>此类别以甜品为主，介绍了在家就可以制作的简单小甜品食谱。</p>
 
 
-			<div class="margin-top-25"></div>
-
-
-			<!-- Nutrition Facts -->
-			<h4>详细信息</h4>
-
-			<fieldset class="additional-info">
-				<table>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="5">卡路里</label></td>
-					<td><input id="5" type="text" /></td>
-				</tr>
-
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="7">热量</label></td>
-					<td><input id="7" type="text" /></td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="8">蛋白质</label></td>
-					<td><input id="8" type="text" /></td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="9">胆固醇</label></td>
-					<td><input id="9" type="text" /></td>
-				</tr>
-
-				</table>
-			</fieldset>
-
-			<div class="margin-top-30"></div>
-			<a href="" class="button color big">发表</a>
-
-		</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
 	</div>
+
+		<div class="clearfix"></div>
+
+		<!-- Pagination -->
+		<div class="pagination-container masonry">
+			<nav class="pagination">
+				<ul>
+					<li><a href="#" class="current-page">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+				</ul>
+			</nav>
+
+			<nav class="pagination-next-prev">
+				<ul>
+					<li><a href="#" class="prev"></a></li>
+					<li><a href="#" class="next"></a></li>
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+
+
+<!-- Sidebar
+================================================== -->
+<div class="four columns">
+
+	<!-- Search Form -->
+	<div class="widget search-form">
+		<nav class="search">
+			<form action="#" method="get">
+				<button><i class="fa fa-search"></i></button>
+				<input class="search-field" type="text" placeholder="Search for recipes" value=""/>
+			</form>
+		</nav>
+		<div class="clearfix"></div>
+	</div>
+
+
+	<!-- Categories -->
+	<div class="widget">
+		<h4 class="headline">更多分类</h4>
+		<span class="line margin-bottom-20"></span>
+		<div class="clearfix"></div>
+
+		<ul class="categories">
+			<li><a href="#">早餐 <span>(2)</span></a></li>
+			<li><a href="#">正餐 <span>(2)</span></a></li>
+			<li><a href="#">汤类 <span>(2)</span></a></li>
+			<li><a href="#">饭前小菜 <span>(2)</span></a></li>
+			<li><a href="#">饭后甜点 <span>(2)</span></a></li>
+		</ul>
+	</div>
+
+
+	<!-- Popular Recipes -->
+	<div class="widget">
+		<h4 class="headline">分享</h4>
+		<span class="line margin-bottom-30"></span>
+		<div class="clearfix"></div>
+
+		<ul class="share-buttons">
+			<li class="facebook-share">
+				<a href="#">
+					<span class="counter">1,234</span>
+					<span class="counted">粉丝</span>
+					<span class="action-button">点赞</span>
+				</a>
+			</li>
+
+			<li class="twitter-share">
+				<a href="#">
+					<span class="counter">863</span>
+					<span class="counted">粉丝</span>
+					<span class="action-button">Follow</span>
+				</a>
+			</li>
+
+			<li class="google-plus-share">
+				<a href="#">
+					<span class="counter">902</span>
+					<span class="counted">Followers</span>
+					<span class="action-button">Follow</span>
+				</a>
+			</li>
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+
+</div>
+
+
 </div>
 <!-- Container / End -->
 
+<div class="margin-top-5"></div>
 
-<div class="margin-top-50"></div>
 
 </div>
 <!-- Wrapper / End -->
+
 
 
 <!-- Footer
@@ -328,7 +353,7 @@
 
 				<ul class="footer-links">
 					<li>
-						<a href="recipes.html">浏览食谱</a>
+						<a href="recipe.html">浏览食谱</a>
 					</li>
 					<li>
 						<a href="submit-recipe.html">上传食谱</a>
