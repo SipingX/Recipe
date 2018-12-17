@@ -1,0 +1,52 @@
+package business;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import dao.DAO;
+import entity.Recipe;
+import entity.Step;
+
+public class StepBusi {
+	
+	private Connection con = null;
+	private PreparedStatement ppst = null;
+	private ResultSet rs = null;
+//	private int rs_2;
+	private String sql = "";
+	Object a[] = null;
+	
+	public Iterator<Step> getStep(Recipe recipe){
+		List<Step> list = null;
+		Iterator<Step> listall = null;
+		a = new Object[1];
+		sql="select sequence,description,picture from step where recipe = ?;";
+		a[0] = recipe.getId();
+		try {
+			con = DAO.getConnection();
+			ppst = DAO.getPreparedStatement(con, sql, a);
+			rs = DAO.getResultSet(ppst);
+			list = new ArrayList<Step>();
+			while(rs.next()){	
+				Step step = new Step();
+				step.setSequence(rs.getInt(1));
+				step.setDescription(rs.getString(2));
+				step.setPicture(rs.getString(3));
+				list.add(step);
+			}	
+			DAO.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		listall = list.iterator();
+		
+		return listall;
+	} 
+
+}
