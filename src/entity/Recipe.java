@@ -6,6 +6,7 @@ public class Recipe {
 	private String author;
 	private String censor;
 	private String name;
+	private String category;
 	private String rating;
 	private int browse;
 	private String complexity;
@@ -41,6 +42,13 @@ public class Recipe {
 	}
 	public String getName() {
 		return this.name;
+	}
+	
+	public void setCategory(String category) {
+		this.category=category;
+	}
+	public String getCategory() {
+		return this.category;
 	}
 	
 	public void setRating(String rating) {
