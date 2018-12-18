@@ -31,10 +31,10 @@
 			function addText() {
 				var table = document.getElementById("step");
 				table.innerHTML += "<tr class='ingredients-cont'>" +
-					"<td class='label'><label for='8'>第" + step + "步</label></td>" +
-					"<td><input id='8' name='step' type='text' /></td>" +
-					"<td class='action'><span onclick='deleteText(this)'><i class='fa fa-remove'></i></span></td>" +
-					"</tr>";
+										"<td class='label'><label for='8'>第" + step + "步</label></td>" +
+										"<td><input id='8' name='step' type='text' /></td>" +
+										"<td class='action'><span onclick='deleteText(this)'><i class='fa fa-remove'></i></span></td>" +
+									"</tr>";
 				step++;
 			}
 
@@ -43,6 +43,52 @@
 				This.parentNode.parentNode.parentNode.removeChild(This.parentNode.parentNode);
 				step--;
 			}
+			
+			function addIngredient() {
+				var table = document.getElementById("ingredients-sort");
+				table.innerHTML += "<tr class='ingredients-cont ing'>" +
+										"<td class='icon'><i class='fa fa-arrows'></i></td>" +
+										"<td>" +
+//											 "<div class='select'>" + 
+												"<select name='ingredient_name'>" +
+													"<option value='1'>牛腩</option>" +
+													"<option value='2'>植物油</option>" +
+													"<option value='3'>洋葱</option>" +
+													"<option value='4'>香粉</option>" +
+													"<option value='5'>黑胡椒</option>" +
+													"<option value='6'>土豆</option>" +
+													"<option value='7'>胡萝卜</option>" +
+													"<option value='8'>芹菜</option>" +
+													"<option value='9'>娃娃菜</option>" +
+													"<option value='10'>西兰花</option>" +
+												"</select>" +
+//											"</div>" +
+										"</td>" +
+										"<td><input name='ingredient_note' tabindex='6' type='text' placeholder='备注(用量，其它信息)' /></td>" +
+										"<td class='action'><span onclick='deleteIngredient(this)'><i class='fa fa-remove'></i></span></td>" +
+									"</tr>";	
+			}
+			
+			function deleteIngredient(This) {
+				//获取删除按钮的父元素 的 父元素 利用 爷爷元素 删除
+				This.parentNode.parentNode.parentNode.removeChild(This.parentNode.parentNode);
+			}
+			
+/* 			"<div class='select'>" +
+			"<select tabindex='5' type='text' data-placeholder='食材' class='chosen-select-no-single' name='ingredient_name'>" +
+				"<option value='1'>牛腩</option>" +
+				"<option value='2'>植物油</option>" +
+				"<option value='3'>洋葱</option>" +
+				"<option value='4'>香粉</option>" +
+				"<option value='5'>黑胡椒</option>" +
+				"<option value='6'>土豆</option>" +
+				"<option value='7'>胡萝卜</option>" +
+				"<option value='8'>芹菜</option>" +
+				"<option value='9'>娃娃菜</option>" +
+				"<option value='10'>西兰花</option>" +
+			"</select>" +
+		"</div>" + */
+			
 		</script>
 
 	</head>
@@ -147,12 +193,12 @@
 			<div class="container">
 				<div class="sixteen columns">
 					<div class="submit-recipe-form">
-						<form action="" method="post">
+						<form action="uploadRecipe" method="post" enctype="multipart/form-data">
 
 							<!-- Recipe Title -->
 							<h4>食谱名称</h4>
 							<nav class="title">
-								<input class="search-field" type="text" placeholder="" value="" />
+								<input name="recipe_name" class="search-field" type="text" placeholder=""/>
 							</nav>
 							<div class="clearfix"></div>
 
@@ -211,31 +257,24 @@
 
 								<table id="ingredients-sort">
 
-									<tr class="ingredients-cont ing">
+<!-- 									<tr class="ingredients-cont ing">
 										<td class="icon"><i class="fa fa-arrows"></i></td>
 										<td>
 											<div class="select">
 												<select tabindex="5" data-placeholder="食材" class="chosen-select-no-single" name="ingredient_name">
-
 													<option>禽类</option>
 													<option>豆制品</option>
 													<option>海鲜类</option>
-													<option>全素食</option>
-													<option>蔬菜</option>
-													<option>甜品</option>
-													<option>速食食品</option>
-													<option>面包、蛋糕</option>
-													<option>节日代表</option>
 												</select>
 											</div>
 										</td>
 										<td><input name="ingredient_note" tabindex="6" type="text" placeholder="备注(用量，其它信息)" /></td>
-										<td class="action"><a title="Delete" class="delete" href="#"><i class="fa fa-remove"></i></a></td>
-									</tr>
+									</tr> -->
 
 								</table>
-
-								<a href="#" class="button color add_ingredient">添加新的配料</a>
+								
+								<input type="button" value="添加食材" onclick="addIngredient()" />
+									
 							</fieldset>
 
 
@@ -310,7 +349,7 @@
 							</fieldset>
 
 							<div class="margin-top-30"></div>
-							<a href="" class="button color big">发表</a>
+							<input type="submit" onclick="" value="发表" />
 
 						</form>
 					</div>
