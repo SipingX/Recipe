@@ -17,7 +17,7 @@ public class PictureBusi {
 	private Connection con = null;
 	private PreparedStatement ppst = null;
 	private ResultSet rs = null;
-//	private int rs_2;
+	private int rs_2;
 	private String sql = "";
 	Object a[] = null;
 	
@@ -47,5 +47,26 @@ public class PictureBusi {
 		
 		return listall;
 	} 
+	
+	public int upload(Picture picture) {
+		int r = 0;
+		sql = "insert into r_picture (recipe,number,url) value(?,?,?) ;";
+		a = new Object[3];
+		a[0] = picture.getRecipe();
+		a[1] = picture.getNumber();
+		a[2] = picture.getUrl();
+		try {
+			con = DAO.getConnection();
+			ppst = DAO.getPreparedStatement(con, sql, a);	
+			rs_2 = DAO.update(ppst);
+			DAO.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		r = rs_2;
+		
+		return r;
+	}
 
 }

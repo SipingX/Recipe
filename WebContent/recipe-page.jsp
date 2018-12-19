@@ -129,6 +129,7 @@
 <%
 	while (picList.hasNext()) {
 		picture = picList.next();
+		System.out.println("图片从数据库获取地址："+picture.getUrl());
 		c = 1;
 %>
 	<img src="<%= picture.getUrl() %>" alt="" />

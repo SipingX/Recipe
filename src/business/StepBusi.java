@@ -17,7 +17,7 @@ public class StepBusi {
 	private Connection con = null;
 	private PreparedStatement ppst = null;
 	private ResultSet rs = null;
-//	private int rs_2;
+	private int rs_2;
 	private String sql = "";
 	Object a[] = null;
 	
@@ -48,5 +48,28 @@ public class StepBusi {
 		
 		return listall;
 	} 
+	
+	public int upload(Step step) {
+		int r = 0;
+		sql = "insert \r\n" + 
+				"into step (recipe,sequence,description)\r\n" + 
+				"value(?,?,?)";
+		a = new Object[3];
+		a[0] = step.getRecipe();
+		a[1] = step.getSequence();
+		a[2] = step.getDescription();
+		try {
+			con = DAO.getConnection();
+			ppst = DAO.getPreparedStatement(con, sql, a);
+			rs_2 = DAO.update(ppst);
+			DAO.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		r = rs_2;
+		
+		return r;
+	}
 
 }
