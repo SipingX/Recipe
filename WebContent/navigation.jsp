@@ -63,7 +63,7 @@
     // 根据起终点名称规划驾车导航路线
     driving.search([
         {keyword: '滕王阁',city:'南昌'},
-        {keyword: '八一广场',city:'南昌'}
+        {keyword: address,city:''}
     ], function(status, result) {
         // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
         if (status === 'complete') {

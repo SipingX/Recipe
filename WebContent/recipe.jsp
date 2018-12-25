@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -318,7 +320,7 @@
 
 				<!-- Thumbnail -->
 				<div class="thumbnail-holder">
-					<a href="recipe-page.html">
+					<a href="getRecipePageAct?recipeId=1">
 						<img src="images/recipeThumb-09.jpg" alt=""/>
 						<div class="hover-cover"></div>
 						<div class="hover-icon">查看食谱</div>
@@ -327,7 +329,7 @@
 
 				<!-- Content -->
 				<div class="recipe-box-content">
-					<h3><a href="recipe-page.html">牛腩煲</a></h3>
+					<h3><a href="getRecipePageAct?recipeId=1">牛腩煲</a></h3>
 
 					<div class="rating five-stars">
 						<div class="star-rating"></div>
