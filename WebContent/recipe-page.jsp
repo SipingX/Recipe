@@ -228,7 +228,7 @@
 
 		<!-- Share Post -->
 		<ul class="share-post">
-			<li><a href="navigation.jsp?address=<%= recipe.getAddress() %>" class="pinterest-share">推荐店铺地址导航</a></li>
+			<li><a href="navigation.jsp?address=<%=recipe.getAddress() %>" class="pinterest-share">推荐店铺地址导航</a></li>
 
 			<!-- <li><a href="#add-review" class="rate-recipe">Add Review</a></li> -->
 		</ul>

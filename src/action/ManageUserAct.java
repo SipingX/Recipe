@@ -2,7 +2,6 @@ package action;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,26 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import business.IncludeBusi;
-import business.PictureBusi;
-import business.RecipeBusi;
-import business.StepBusi;
-import entity.Include;
-import entity.Picture;
-import entity.Recipe;
-import entity.Step;
+import business.manageUserBusi;
+import entity.User;
 
 /**
- * Servlet implementation class getRecipePageAct
+ * Servlet implementation class manageUserAct
  */
-@WebServlet("/getRecipePageAct")
-public class getRecipePageAct extends HttpServlet {
+@WebServlet("/manageUserAct")
+public class ManageUserAct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getRecipePageAct() {
+    public ManageUserAct() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,31 +33,39 @@ public class getRecipePageAct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RecipeBusi recb = new RecipeBusi();
-		Recipe recipe = new Recipe();
-		recipe.setId(Integer.parseInt(request.getParameter("recipeId")));
+		int page=1;
+		int pagesize = 2;
+		int recordcount = 0;
+		int pagecount = 0;
+		manageUserBusi mub = new manageUserBusi();
+		User userlist[] = null;
+		
+		//读取客户端传递过来的要显示的页码
+		if(request.getParameter("page")!=null){
+			page=Integer.parseInt(request.getParameter("page"));
+		}
+		
 		try {
-			recipe = recb.getRecipePageInfo(recipe);
+			recordcount = mub.getUserCount();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		IncludeBusi incb = new IncludeBusi();
-		Iterator<Include> include = incb.getInclude(recipe) ;
+		pagecount = recordcount/pagesize+(recordcount%pagesize==0?0:1);
 		
-		StepBusi steb = new StepBusi();
-		Iterator<Step> step = steb.getStep(recipe);
-		
-		PictureBusi picb = new PictureBusi();
-		Iterator<Picture> picture = picb.getPicture(recipe);
-		
-		request.setAttribute("recipe", recipe);
-		request.setAttribute("include", include);
-		request.setAttribute("step", step);
-		request.setAttribute("picture", picture);
-		
-		request.getRequestDispatcher("recipe-page.jsp").forward(request, response);
+		try {
+			userlist = mub.getUserList(page, pagesize);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// 传递总页数及当前页至user.jsp页面
+		request.setAttribute("page", page);
+		request.setAttribute("userlist", userlist);
+		request.setAttribute("pagecount",pagecount);
+
+		request.getRequestDispatcher("user.jsp").forward(request, response);
 	}
 
 	/**

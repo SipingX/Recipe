@@ -55,9 +55,9 @@ public class LoginAct extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(rs == 1) {
-			response.sendRedirect("index.html");
+			response.sendRedirect("index.jsp");
 		}else {
-			response.sendRedirect("login.html");
+			response.sendRedirect("login.jsp");
 		}
 	}
 

@@ -52,6 +52,16 @@ public class uploadRecipe extends HttpServlet {
 		int result = 0;
 		
 		Recipe recipe = new Recipe();
+		RecipeBusi recbus = new RecipeBusi();
+		if(recbus.InitiateOneRecipe() == 1) {
+			recipe.setId(recbus.getMaxId());
+			System.out.println("获得食谱Id:"+recipe.getId());
+		}else {
+			System.out.println("上传食谱初始化失败!");
+			String html = "上传食谱初始化失败！<br><a href='recipe_submit.jsp'>重新上传</a><br>";
+			response.getWriter().write(html);
+			return;
+		}
 		
 		List<Step> steps = new ArrayList<Step>();
 		
@@ -121,6 +131,21 @@ public class uploadRecipe extends HttpServlet {
 							//getFieldName是获取普通表单字段name值
 							//getName是获取文件名
 							String fileName = item.getName();
+							
+							//控制文件类型
+							String ext = fileName.substring(fileName.indexOf(".")+1);
+							if(!ext.equals("jpg")) {
+								System.out.println("图片类型有误！图片只能是jpg");
+								if(recbus.delete(recipe.getId())) {
+									System.out.println("初始食谱已被删除！");
+								}else {
+									System.out.println("初始食谱删除失败！");
+								}
+								String html = "文件（此处为图片）上传失败！<br>图片类型有误！图片只能是jpg！<br><a href='recipe_submit.jsp'>重新上传</a><br>";
+								response.getWriter().write(html);
+								return ;
+							}
+							
 							if(fileName.contains("\\")) {
 		                        //如果包含则截取字符串
 								fileName = fileName.substring(fileName.lastIndexOf("\\")+1);
@@ -132,9 +157,8 @@ public class uploadRecipe extends HttpServlet {
 							System.out.println("文件保存路径："+path);
 							
 							//获取不包含路径的文件名
-							String ext = "";
 							ext = fileName.substring(fileName.lastIndexOf("."));
-							fileName = "recipePhoto-" + picNo + ext;
+							fileName = "recipePhoto-"+recipe.getId()+"-"+picNo+ext;
 							picNo++;
 							
 							picUrls.add(fileName);
@@ -147,8 +171,14 @@ public class uploadRecipe extends HttpServlet {
 				}
 			} catch(FileUploadBase.SizeLimitExceededException e) {
 				System.out.println("上传文件大小超过限制！最大100MB");
-				String html = "图片上传失败！<br>上传文件大小超过限制！最大100MB!<br><a href='submit-recipe.jsp'>重新上传</a><br>";
+				if(recbus.delete(recipe.getId())) {
+					System.out.println("初始食谱已被删除！");
+				}else {
+					System.out.println("初始食谱删除失败！");
+				}
+				String html = "文件（此处为图片）上传失败！<br>上传文件大小超过限制！最大100MB!<br><a href='recipe_submit.jsp'>重新上传</a><br>";
 				response.getWriter().write(html);
+				return;
 			} catch (FileUploadException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -158,30 +188,38 @@ public class uploadRecipe extends HttpServlet {
 			}
 		}else {
 			System.out.println("前台的form无multipart属性！");
-			System.out.println("图片上传失败！");
-			String html = "图片上传失败！<br>前台的form无multipart属性！<br><a href='submit-recipe.jsp'>重新上传</a><br>";
+			System.out.println("食谱上传失败！");
+			if(recbus.delete(recipe.getId())) {
+				System.out.println("初始食谱已被删除！");
+			}else {
+				System.out.println("初始食谱删除失败！");
+			}
+			String html = "食谱上传失败！<br>前台的form无multipart属性！<br><a href='recipe_submit.jsp'>重新上传</a><br>";
 			response.getWriter().write(html);
+			return ;
 		}
 		
-		RecipeBusi recbus = new RecipeBusi();
 		StepBusi stebus = new StepBusi();
 		IncludeBusi incbus = new IncludeBusi();
 		PictureBusi picbus = new PictureBusi();
 		int i = 0;
 		
-		//上传食谱单一数据
+		//上传食谱基本信息
 		recipe.setAuthor("17379506118");
 		
 		result = recbus.upload(recipe);
 		if(result == 1) {
-			System.out.println("食谱单一数据上传成功！");
+			System.out.println("食谱基本信息上传成功！");
 		}else {
-			String html = "食谱单一数据上传失败！<br><a href='submit-recipe.jsp'>重新上传</a><br>";
+			if(recbus.delete(recipe.getId())) {
+				System.out.println("初始食谱已被删除！");
+			}else {
+				System.out.println("初始食谱删除失败！");
+			}
+			String html = "食谱基本信息上传失败！<br><a href='recipe_submit.jsp'>重新上传</a><br>";
 			response.getWriter().write(html);
+			return ;
 		}
-		
-		recipe.setId(recbus.getMaxId());
-		System.out.println("获得食谱Id:"+recipe.getId());
 		
 		//上传步骤
 		Iterator<Step> listStep = steps.iterator();
@@ -197,8 +235,14 @@ public class uploadRecipe extends HttpServlet {
 			if(result == 1) {
 				System.out.println("步骤  "+i+"  上传成功！");
 			}else {
-				String html = "步骤上传失败！<br><a href='submit-recipe.jsp'>重新上传</a><br>";
+				if(recbus.delete(recipe.getId())) {
+					System.out.println("初始食谱已被删除！");
+				}else {
+					System.out.println("初始食谱删除失败！");
+				}
+				String html = "步骤上传失败！<br><a href='recipe_submit.jsp'>重新上传</a><br>";
 				response.getWriter().write(html);
+				return ;
 			}
 		}
 		
@@ -215,8 +259,14 @@ public class uploadRecipe extends HttpServlet {
 			if(result == 1) {
 				System.out.println("食材  "+include.getMaterial()+"  上传成功！");
 			}else {
-				String html = "食材上传失败！<br><a href='submit-recipe.jsp'>重新上传</a><br>";
+				if(recbus.delete(recipe.getId())) {
+					System.out.println("初始食谱已被删除！");
+				}else {
+					System.out.println("初始食谱删除失败！");
+				}
+				String html = "食材上传失败！<br><a href='recipe_submit.jsp'>重新上传</a><br>";
 				response.getWriter().write(html);
+				return ;
 			}
 		}
 		
@@ -234,12 +284,18 @@ public class uploadRecipe extends HttpServlet {
 			if(result == 1) {
 				System.out.println("图片  "+picture.getNumber()+"  录入数据库成功！");
 			}else {
-				String html = "图片录入数据库失败！<br><a href='submit-recipe.jsp'>重新上传</a><br>";
+				if(recbus.delete(recipe.getId())) {
+					System.out.println("初始食谱已被删除！");
+				}else {
+					System.out.println("初始食谱删除失败！");
+				}
+				String html = "图片录入数据库失败！<br><a href='recipe_submit.jsp'>重新上传</a><br>";
 				response.getWriter().write(html);
+				return;
 			}
 		}
 		
-		String html = "您的食谱上传成功！请耐心等待审核...<br><a href='submit-recipe.jsp'>返回上传页面</a><br>";
+		String html = "您的食谱上传成功！请耐心等待审核...<br><a href='recipe_submit.jsp'>返回上传页面</a><br>";
 		response.getWriter().write(html);
 	}
 

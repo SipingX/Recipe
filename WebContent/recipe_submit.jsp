@@ -306,7 +306,7 @@
 									</tr>
 
 									<tr class="ingredients-cont">
-										<td class="label"><label for="2">烹饪时间</label></td>
+										<td class="label"><label for="2">烹饪时间（分钟）</label></td>
 										<td><input id="2" name="minute" type="text" /></td>
 									</tr>
 

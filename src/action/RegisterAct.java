@@ -54,9 +54,9 @@ public class RegisterAct extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(rs == 1) {
-			response.sendRedirect("login.html");
+			response.sendRedirect("login.jsp");
 		}else {
-			html="×¢²áÊ§°Ü£¡<br><a href='login.html'>ÖØÐÂ×¢²á</a>";
+			html="×¢²áÊ§°Ü£¡<br><a href='login.jsp'>ÖØÐÂ×¢²á</a>";
 			response.getWriter().write(html);
 		}
 	}

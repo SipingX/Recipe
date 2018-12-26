@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -49,7 +51,7 @@
 <div class="thirteen columns navigation">
 
 	<nav id="navigation" class="menu nav-collapse">
-<ul>
+		<ul>
 			<li>
 				<a href="index.html">主页</a>
 			</li>
@@ -59,7 +61,7 @@
 			</li>
 
 			<li>
-				<a href="original.html"  id="current">食材</a>
+				<a href="original.html" id="current">食材</a>
 			</li>
 
 			<li>
@@ -74,13 +76,6 @@
 				<a href="submit-recipe.html">上传食谱</a>
 				<ul>
 					<li><a href="contact.html">联系我们</a></li>
-				</ul>
-			</li>
-			
-			<li>
-				<a href="login.html">登录/注册</a>
-				<ul>
-					<li><a href="#">退出登录</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -99,234 +94,204 @@
 </div>
 
 
-<!-- Content
+<!-- Titlebar
 ================================================== -->
+
+<!-- Container -->
 <div class="container">
 
-	<!-- Masonry -->
-	<div class="twelve columns ">
-
-		<!-- Headline -->
- 		<h3 class="headline">食材分类</h3>
-		<span class="line rb margin-bottom-35"></span>
+	<!-- Headline -->
+	<div class="sixteen columns">
+ 		<h3 class="headline">牛肉选购注意事项</h3>
+		<span class="line margin-bottom-35"></span>
 		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+<p>挑选牛肉之“看、摸、闻”：<br>
+1、观察颜色。正常新鲜的牛肉肌肉呈暗红色，均匀、有光泽、外表微干，尤其在冬季其表面容易形成一层薄薄的风干膜，脂肪呈白色或奶油色。而不新鲜的牛肉的肌肉颜色发暗，无光泽，脂肪呈现黄绿色；<br>
+2、摸手感。新鲜的牛肉富有弹性，指压后凹陷可立即恢复，新切面肌纤维细密。不新鲜的牛肉指压后凹陷不能恢复，留有明显压痕；<br>
+3、闻气味。新鲜肉具有鲜肉味儿。不新鲜的牛肉有异味甚至臭味。<br>
+如今食品安全令人担忧，各种造假无处不在，牛肉也没能幸免。在这里简单向大家介绍牛肉的真假识别方法：<br>
+1、如何识别新鲜牛肉？新鲜牛肉质地坚实有弹性，肉色呈鲜红色，肌纤维较细。嫩牛肉脂肪呈白色，反之肉色深红，触摸肉皮粗糙者多为老牛肉， 不要购买。<br>
+2、如何识别注水牛肉？牛肉注水后，肉纤维更显粗糙，暴露纤维明显；因为注水，使牛肉有鲜嫩感，但仔细观察肉面，常有水分渗出；用手摸肉，不粘手，湿感重；用干纸巾在牛肉表面，纸很快即被湿透。而正常牛肉手摸不粘手，纸贴不透湿。</p>
+
+
+<!-- Container -->
+<div class="container">
+
+	<!-- Headline -->
+	<div class="sixteen columns">
+ 		<h3 class="headline">食谱</h3>
+		<span class="line margin-bottom-35"></span>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+
 
 		<!-- Isotope -->
-		<div class="list-style">
+		<div class="isotope">
 
 			<!-- Recipe #1 -->
-			<div class="four recipe-box columns">
+			<div class="four isotope-box columns">
 
 				<!-- Thumbnail -->
 				<div class="thumbnail-holder">
-					<a href="original-page-1.html">
+					<a href="recipe-page.html">
 						<img src="images/recipeThumb-09.jpg" alt=""/>
 						<div class="hover-cover"></div>
-						<div class="hover-icon">查看分类</div>
+						<div class="hover-icon">查看食谱</div>
 					</a>
 				</div>
 
 				<!-- Content -->
 				<div class="recipe-box-content">
-					<h3><a href="original-page-1.html">肉禽类</a></h3>
+					<h3><a href="recipe-page.html">牛腩煲</a></h3>
 
-					<p>此类别以肉禽类为主，介绍了各肉禽类的营养与选购，用户可选择喜欢的烹饪方法。</p>
+					<div class="rating five-stars">
+						<div class="star-rating"></div>
+						<div class="star-bg"></div>
+					</div>
+
+					<div class="recipe-meta"><i class="fa fa-clock-o"></i> 2 小时</div>
 
 					<div class="clearfix"></div>
 				</div>
 			</div>
 
 			<!-- Recipe #2 -->
-			<div class="four recipe-box columns">
+			<div class="four isotope-box columns">
 
 				<!-- Thumbnail -->
 				<div class="thumbnail-holder">
-					<a href="original-page-2.html">
-						<img src="images/yu1.jpg" alt=""/>
+					<a href="recipe-page-1.html">
+						<img src="images/recipeThumb-03.jpg" alt=""/>
 						<div class="hover-cover"></div>
-						<div class="hover-icon">查看分类</div>
+						<div class="hover-icon">查看食谱</div>
 					</a>
 				</div>
 
 				<!-- Content -->
 				<div class="recipe-box-content">
-					<h3><a href="recipe-page-2.html">水产品类</a></h3>
+					<h3><a href="recipe-page-1.html">咖喱鸡块</a></h3>
 
-					<p>此类别以水产品类为主，介绍了水产品类的营养与选购，用户可选择喜欢的烹饪方式。</p>
+					<div class="rating five-stars">
+						<div class="star-rating"></div>
+						<div class="star-bg"></div>
+					</div>
+
+					<div class="recipe-meta"><i class="fa fa-clock-o"></i> 45 分钟</div>
 
 					<div class="clearfix"></div>
 				</div>
 			</div>
 
 			<!-- Recipe #3 -->
-			<div class="four recipe-box columns">
+			<div class="four isotope-box columns">
 
 				<!-- Thumbnail -->
 				<div class="thumbnail-holder">
-					<a href="original-page-3.html">
-						<img src="images/recipeThumb-01b.jpg" alt=""/>
+					<a href="recipe-page-1.html">
+						<img src="images/recipeThumb-05.jpg" alt=""/>
 						<div class="hover-cover"></div>
-						<div class="hover-icon">查看分类</div>
+						<div class="hover-icon">View Recipe</div>
 					</a>
 				</div>
 
 				<!-- Content -->
 				<div class="recipe-box-content">
-					<h3><a href="original-page-3.html">蔬菜类</a></h3>
+					<h3><a href="recipe-page-1.html">玉米鸡肉卷</a></h3>
 
-					<p>此类别以蔬菜类为主，介绍了蔬菜类的营养与选购，用户可选择喜欢的烹饪方式。</p>
+					<div class="rating four-stars">
+						<div class="star-rating"></div>
+						<div class="star-bg"></div>
+					</div>
+
+					<div class="recipe-meta"><i class="fa fa-clock-o"></i> 30 分钟</div>
 
 					<div class="clearfix"></div>
 				</div>
 			</div>
 
 			<!-- Recipe #4 -->
-			<div class="four recipe-box columns">
+			<div class="four isotope-box columns">
 
 				<!-- Thumbnail -->
 				<div class="thumbnail-holder">
-					<a href="original-page-4.html">
-						<img src="images/recipeThumb-04b.jpg" alt=""/>
+					<a href="recipe-page-2.html">
+						<img src="images/recipeThumb-06.jpg" alt=""/>
 						<div class="hover-cover"></div>
-						<div class="hover-icon">查看分类</div>
+						<div class="hover-icon">View Recipe</div>
 					</a>
 				</div>
 
 				<!-- Content -->
 				<div class="recipe-box-content">
-					<h3><a href="original-page-4.html">水果类</a></h3>
+					<h3><a href="recipe-page-2.html">红烧鸡翅</a></h3>
 
-					<p>此类别以水果类为主，介绍了水果类的营养与选购，用户可选择喜欢的烹饪方式。</p>
+					<div class="rating five-stars">
+						<div class="star-rating"></div>
+						<div class="star-bg"></div>
+					</div>
+
+					<div class="recipe-meta"><i class="fa fa-clock-o"></i> 45 分钟</div>
 
 					<div class="clearfix"></div>
 				</div>
 			</div>
 
 			<!-- Recipe #5 -->
-			<div class="four recipe-box columns">
+			<div class="four isotope-box columns">
 
 				<!-- Thumbnail -->
 				<div class="thumbnail-holder">
-					<a href="original-page-5.html">
-						<img src="images/recipeThumb-02b.jpg" alt=""/>
+					<a href="recipe-page-1.html">
+						<img src="images/recipeThumb-07.jpg" alt=""/>
 						<div class="hover-cover"></div>
-						<div class="hover-icon">查看分类</div>
+						<div class="hover-icon">View Recipe</div>
 					</a>
 				</div>
 
 				<!-- Content -->
 				<div class="recipe-box-content">
-					<h3><a href="original-page-5.html">甜品类</a></h3>
+					<h3><a href="recipe-page-1.html">柠檬咖喱鸡</a></h3>
 
-					<p>此类别以甜品为主，介绍了在家就可以制作的简单小甜品食谱。</p>
+					<div class="rating five-stars">
+						<div class="star-rating"></div>
+						<div class="star-bg"></div>
+					</div>
 
+					<div class="recipe-meta"><i class="fa fa-clock-o"></i> 1 小时 20 分钟</div>
 
 					<div class="clearfix"></div>
 				</div>
 			</div>
-	</div>
 
-		<div class="clearfix"></div>
 
 		<!-- Pagination -->
-		<div class="pagination-container masonry">
-			<nav class="pagination">
-				<ul>
-					<li><a href="#" class="current-page">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-				</ul>
-			</nav>
+		<div class="sixteen columns">
+			<div class="pagination-container">
+				<nav class="pagination">
+					<ul>
+						<li><a href="#" class="current-page">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+					</ul>
+				</nav>
 
-			<nav class="pagination-next-prev">
-				<ul>
-					<li><a href="#" class="prev"></a></li>
-					<li><a href="#" class="next"></a></li>
-				</ul>
-			</nav>
+				<nav class="pagination-next-prev">
+					<ul>
+						<li><a href="#" class="prev"></a></li>
+						<li><a href="#" class="next"></a></li>
+					</ul>
+				</nav>
+			</div>
 		</div>
 
-	</div>
-
-
-<!-- Sidebar
-================================================== -->
-<div class="four columns">
-
-	<!-- Search Form -->
-	<div class="widget search-form">
-		<nav class="search">
-			<form action="#" method="get">
-				<button><i class="fa fa-search"></i></button>
-				<input class="search-field" type="text" placeholder="Search for recipes" value=""/>
-			</form>
-		</nav>
-		<div class="clearfix"></div>
-	</div>
-
-
-	<!-- Categories -->
-	<div class="widget">
-		<h4 class="headline">更多分类</h4>
-		<span class="line margin-bottom-20"></span>
-		<div class="clearfix"></div>
-
-		<ul class="categories">
-			<li><a href="#">早餐 <span>(2)</span></a></li>
-			<li><a href="#">正餐 <span>(2)</span></a></li>
-			<li><a href="#">汤类 <span>(2)</span></a></li>
-			<li><a href="#">饭前小菜 <span>(2)</span></a></li>
-			<li><a href="#">饭后甜点 <span>(2)</span></a></li>
-		</ul>
-	</div>
-
-
-	<!-- Popular Recipes -->
-	<div class="widget">
-		<h4 class="headline">分享</h4>
-		<span class="line margin-bottom-30"></span>
-		<div class="clearfix"></div>
-
-		<ul class="share-buttons">
-			<li class="facebook-share">
-				<a href="#">
-					<span class="counter">1,234</span>
-					<span class="counted">粉丝</span>
-					<span class="action-button">点赞</span>
-				</a>
-			</li>
-
-			<li class="twitter-share">
-				<a href="#">
-					<span class="counter">863</span>
-					<span class="counted">粉丝</span>
-					<span class="action-button">Follow</span>
-				</a>
-			</li>
-
-			<li class="google-plus-share">
-				<a href="#">
-					<span class="counter">902</span>
-					<span class="counted">Followers</span>
-					<span class="action-button">Follow</span>
-				</a>
-			</li>
-		</ul>
-		<div class="clearfix"></div>
-	</div>
-
 </div>
-
-
-</div>
-<!-- Container / End -->
-
-<div class="margin-top-5"></div>
 
 
 </div>
 <!-- Wrapper / End -->
-
 
 
 <!-- Footer
