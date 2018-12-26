@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%
 	String address = request.getParameter("address");
-	System.out.println(address);
 %>
 <!doctype html>
 <html>
@@ -50,9 +49,10 @@
 <div id="panel"></div>
 <script type="text/javascript">
     //基本地图加载
+    var address = '<%=address%>'; 
     var map = new AMap.Map("container", {
         resizeEnable: true,
-        center: [116.397428, 39.90923],//地图中心点
+/*         center: [116.397428, 39.90923],//地图中心点 */
         zoom: 13 //地图显示的缩放级别
     });
     //构造路线导航类
@@ -62,8 +62,8 @@
     }); 
     // 根据起终点名称规划驾车导航路线
     driving.search([
-        {keyword: '滕王阁',city:'南昌'},
-        {keyword: address,city:''}
+        {keyword: '滕王阁'},
+        {keyword: address}
     ], function(status, result) {
         // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
         if (status === 'complete') {

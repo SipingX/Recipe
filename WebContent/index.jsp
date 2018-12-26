@@ -327,7 +327,7 @@
 
 						<!-- Thumbnail -->
 						<div class="thumbnail-holder">
-							<a href="getRecipePageAct?recipeId=33">
+							<a href="getRecipePageAct?recipeId=1">
 								<img src="images/recipeThumb-09.jpg" alt="" />
 								<div class="hover-cover"></div>
 								<div class="hover-icon">查看食谱</div>
