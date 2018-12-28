@@ -1,7 +1,8 @@
 package action;
 
 import java.io.IOException;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,26 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import business.IncludeBusi;
-import business.PictureBusi;
 import business.RecipeBusi;
-import business.StepBusi;
-import entity.Include;
-import entity.Picture;
 import entity.Recipe;
-import entity.Step;
 
 /**
- * Servlet implementation class getRecipePageAct
+ * Servlet implementation class InitIndex
  */
-@WebServlet("/getRecipePageAct")
-public class GetRecipePageAct extends HttpServlet {
+@WebServlet("/InitIndex")
+public class InitIndex extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetRecipePageAct() {
+    public InitIndex() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,27 +34,19 @@ public class GetRecipePageAct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
+		List<Recipe> list = new ArrayList<Recipe>();
 		RecipeBusi recb = new RecipeBusi();
-		Recipe recipe = new Recipe();
-		recipe.setId(Integer.parseInt(request.getParameter("recipeId")));
-		System.out.println("ÇëÇóÊ³Æ×Id£º"+recipe.getId());
-		recipe = recb.getRecipePageInfo(recipe);
+		for(int i=1;i<=5;i++) {
+			Recipe recipe = new Recipe();
+			recipe.setId(i);
+			recipe = recb.getRecipePageInfo(recipe);
+			recipe.setPictures();
+			list.add(recipe);
+		}
 		
-		IncludeBusi incb = new IncludeBusi();
-		Iterator<Include> include = incb.getInclude(recipe).iterator() ;
+		request.setAttribute("recipes_recommended", list);
 		
-		StepBusi steb = new StepBusi();
-		Iterator<Step> step = steb.getStep(recipe).iterator();
-		
-		PictureBusi picb = new PictureBusi();
-		Iterator<Picture> picture = picb.getPicture(recipe).iterator();
-		
-		request.setAttribute("recipe", recipe);
-		request.setAttribute("include", include);
-		request.setAttribute("step", step);
-		request.setAttribute("picture", picture);
-		
-		request.getRequestDispatcher("recipe_page.jsp").forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	/**

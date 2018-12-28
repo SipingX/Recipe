@@ -17,26 +17,32 @@ public class RecipeBusi {
 	private String sql = "";
 	Object a[] = null;
 	
-	public Recipe getRecipePageInfo(Recipe recipe) throws SQLException {
-		sql = "select author,name,rating,browse,complexity,minute,tasty,method,description,address from recipe where id = ?;";
+	public Recipe getRecipePageInfo(Recipe recipe) {
+		sql = "select author,name,category,rating,browse,complexity,minute,tasty,method,description,address from recipe where id = ?;";
 		a = new Object[1];
 		a[0] = recipe.getId();
-		con = DAO.getConnection();
-		ppst = DAO.getPreparedStatement(con, sql, a);
-		rs = DAO.getResultSet(ppst);
-		while(rs.next()) {
-			recipe.setAuthor(rs.getString("author"));
-			recipe.setName(rs.getString("name"));
-			recipe.setRating(rs.getString("rating"));
-			recipe.setBrowse(rs.getInt("browse"));
-			recipe.setComplexity(rs.getString("complexity"));
-			recipe.setMinute(rs.getInt("minute"));
-			recipe.setTasty(rs.getString("tasty"));
-			recipe.setMethod(rs.getString("method"));
-			recipe.setDescription(rs.getString("description"));
-			recipe.setAddress(rs.getString("address"));
+		try {
+			con = DAO.getConnection();
+			ppst = DAO.getPreparedStatement(con, sql, a);
+			rs = DAO.getResultSet(ppst);
+			while(rs.next()) {
+				recipe.setAuthor(rs.getString("author"));
+				recipe.setName(rs.getString("name"));
+				recipe.setCategory(rs.getString("category"));
+				recipe.setRating(rs.getString("rating"));
+				recipe.setBrowse(rs.getInt("browse"));
+				recipe.setComplexity(rs.getString("complexity"));
+				recipe.setMinute(rs.getInt("minute"));
+				recipe.setTasty(rs.getString("tasty"));
+				recipe.setMethod(rs.getString("method"));
+				recipe.setDescription(rs.getString("description"));
+				recipe.setAddress(rs.getString("address"));
+			}
+			DAO.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		DAO.closeConnection(con);
 		
 		return recipe;
 	}
