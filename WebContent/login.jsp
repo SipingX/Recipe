@@ -7,6 +7,7 @@
 <!--<![endif]-->
 
 <head>
+	<script type="text/javascript" src="js/jquery-1.4.2.js"></script>
 	<script type="text/javascript">
 		function loginCheck()
         {
@@ -24,6 +25,15 @@
 			}
 			return true;
         }
+		
+		function send(){
+			$.ajax({  
+				url: "sendMsg",  
+				type: "get",  
+				dataType: "json",  
+				data: {'value': $("input[name='userId_2']").val()},
+			});  
+		}
     </script>
 
 	<!-- Basic Page Needs
@@ -185,13 +195,13 @@
 		                <li>
 		                    <label for="user"  class="input-tips2">手机号：</label>
 		                    <div class="inputOuter2">
-		                        <input type="text" id="user" name="userId" maxlength="16" class="inputstyle2"/>
+		                        <input type="text" id="user" name="userId_2" maxlength="16" class="inputstyle2"/>
 		                    </div>
 		                </li>
 										
 										<li>
 												<div class="inputArea">
-														<input type="button" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="发送验证码"/> 
+														<input type="button" onclick="send()" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="发送验证码"/> 
 												</div>
 												
 										</li><div class="cl"></div>
@@ -199,7 +209,7 @@
 										<li>
 												<label for="user"  class="input-tips2">验证码：</label>
 												<div class="inputOuter2">
-														<input type="text" id="user" name="user" maxlength="16" class="inputstyle2"/>
+														<input type="text" id="user" name="vali" maxlength="16" class="inputstyle2"/>
 												</div>
 										</li>
 		                
