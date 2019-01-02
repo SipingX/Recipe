@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="java.util.*,entity.User"
+%>
+<%
+	User user=new User();
+	if(session.getAttribute("user")!=null){
+		user=(User)session.getAttribute("user");
+	}else{
+		response.sendRedirect("login.jsp");
+	}
+%>
 <%
 	String address = request.getParameter("address");
 %>
@@ -50,6 +60,7 @@
 <script type="text/javascript">
     //基本地图加载
     var address = '<%=address%>'; 
+    var user_address = '<%= user.getAddress() %>';
     var map = new AMap.Map("container", {
         resizeEnable: true,
 /*         center: [116.397428, 39.90923],//地图中心点 */
@@ -62,7 +73,7 @@
     }); 
     // 根据起终点名称规划驾车导航路线
     driving.search([
-        {keyword: '滕王阁'},
+        {keyword: user_address},
         {keyword: address}
     ], function(status, result) {
         // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult

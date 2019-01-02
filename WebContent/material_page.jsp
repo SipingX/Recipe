@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="java.util.*,entity.User"
+%>
+<%
+	User user=new User();
+	if(session.getAttribute("user")!=null){
+		user=(User)session.getAttribute("user");
+	}
+%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -53,30 +61,47 @@
 	<nav id="navigation" class="menu nav-collapse">
 		<ul>
 			<li>
-				<a href="index.html">主页</a>
+				<a href="index.jsp">主页</a>
 			</li>
-
+	
 			<li>
-				<a href="recipe.html">食谱</a>
+				<a href="recipe.jsp">食谱</a>
 			</li>
-
+	
 			<li>
-				<a href="original.html" id="current">食材</a>
+				<a href="material.jsp" id="current">食材</a>
 			</li>
-
+	
 			<li>
 				<a href="#">话题</a>
 			</li>
-
+	
 			<li>
-				<a href="shop.html">购物</a>
+				<a href="shop.jsp">购物</a>
 			</li>
-
+	
 			<li>
-				<a href="submit-recipe.html">上传食谱</a>
+				<a href="recipe_submit.jsp">上传食谱</a>
 				<ul>
-					<li><a href="contact.html">联系我们</a></li>
+					<li><a href="contact.jsp">联系我们</a></li>
 				</ul>
+			</li>
+			
+			<li>
+				<%
+					if(session.getAttribute("user") == null){
+				%>	
+						<a href="login.jsp">登录/注册</a>
+				<% 
+					}else{
+				%>
+						<a href="user.jsp"><%= user.getName() %></a>
+						<ul>
+							<li><a href="LogoutAct">退出登录</a></li>
+						</ul>
+				<%	
+					}
+				%>
 			</li>
 		</ul>
 	</nav>
@@ -136,7 +161,7 @@
 
 				<!-- Thumbnail -->
 				<div class="thumbnail-holder">
-					<a href="recipe-page.html">
+					<a href="getRecipePageAct?recipeId=1">
 						<img src="images/recipeThumb-09.jpg" alt=""/>
 						<div class="hover-cover"></div>
 						<div class="hover-icon">查看食谱</div>
@@ -145,7 +170,7 @@
 
 				<!-- Content -->
 				<div class="recipe-box-content">
-					<h3><a href="recipe-page.html">牛腩煲</a></h3>
+					<h3><a href="getRecipePageAct?recipeId=1">牛腩煲</a></h3>
 
 					<div class="rating five-stars">
 						<div class="star-rating"></div>
@@ -157,116 +182,7 @@
 					<div class="clearfix"></div>
 				</div>
 			</div>
-
-			<!-- Recipe #2 -->
-			<div class="four isotope-box columns">
-
-				<!-- Thumbnail -->
-				<div class="thumbnail-holder">
-					<a href="recipe-page-1.html">
-						<img src="images/recipeThumb-03.jpg" alt=""/>
-						<div class="hover-cover"></div>
-						<div class="hover-icon">查看食谱</div>
-					</a>
-				</div>
-
-				<!-- Content -->
-				<div class="recipe-box-content">
-					<h3><a href="recipe-page-1.html">咖喱鸡块</a></h3>
-
-					<div class="rating five-stars">
-						<div class="star-rating"></div>
-						<div class="star-bg"></div>
-					</div>
-
-					<div class="recipe-meta"><i class="fa fa-clock-o"></i> 45 分钟</div>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-
-			<!-- Recipe #3 -->
-			<div class="four isotope-box columns">
-
-				<!-- Thumbnail -->
-				<div class="thumbnail-holder">
-					<a href="recipe-page-1.html">
-						<img src="images/recipeThumb-05.jpg" alt=""/>
-						<div class="hover-cover"></div>
-						<div class="hover-icon">View Recipe</div>
-					</a>
-				</div>
-
-				<!-- Content -->
-				<div class="recipe-box-content">
-					<h3><a href="recipe-page-1.html">玉米鸡肉卷</a></h3>
-
-					<div class="rating four-stars">
-						<div class="star-rating"></div>
-						<div class="star-bg"></div>
-					</div>
-
-					<div class="recipe-meta"><i class="fa fa-clock-o"></i> 30 分钟</div>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-
-			<!-- Recipe #4 -->
-			<div class="four isotope-box columns">
-
-				<!-- Thumbnail -->
-				<div class="thumbnail-holder">
-					<a href="recipe-page-2.html">
-						<img src="images/recipeThumb-06.jpg" alt=""/>
-						<div class="hover-cover"></div>
-						<div class="hover-icon">View Recipe</div>
-					</a>
-				</div>
-
-				<!-- Content -->
-				<div class="recipe-box-content">
-					<h3><a href="recipe-page-2.html">红烧鸡翅</a></h3>
-
-					<div class="rating five-stars">
-						<div class="star-rating"></div>
-						<div class="star-bg"></div>
-					</div>
-
-					<div class="recipe-meta"><i class="fa fa-clock-o"></i> 45 分钟</div>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-
-			<!-- Recipe #5 -->
-			<div class="four isotope-box columns">
-
-				<!-- Thumbnail -->
-				<div class="thumbnail-holder">
-					<a href="recipe-page-1.html">
-						<img src="images/recipeThumb-07.jpg" alt=""/>
-						<div class="hover-cover"></div>
-						<div class="hover-icon">View Recipe</div>
-					</a>
-				</div>
-
-				<!-- Content -->
-				<div class="recipe-box-content">
-					<h3><a href="recipe-page-1.html">柠檬咖喱鸡</a></h3>
-
-					<div class="rating five-stars">
-						<div class="star-rating"></div>
-						<div class="star-bg"></div>
-					</div>
-
-					<div class="recipe-meta"><i class="fa fa-clock-o"></i> 1 小时 20 分钟</div>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-
-
+		</div>	
 		<!-- Pagination -->
 		<div class="sixteen columns">
 			<div class="pagination-container">

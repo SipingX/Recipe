@@ -8,6 +8,12 @@
 	recipes_rec = (List<Recipe>)request.getAttribute("recipes_recommended");
 }
 %>
+<%
+	User user=new User();
+	if(session.getAttribute("user")!=null){
+		user=(User)session.getAttribute("user");
+	}
+%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -90,15 +96,25 @@
 							<li>
 								<a href="recipe_submit.jsp">上传食谱</a>
 								<ul>
-									<li><a href="contact.html">联系我们</a></li>
+									<li><a href="contact.jsp">联系我们</a></li>
 								</ul>
 							</li>
 							
 							<li>
-								<a href="login.html">登录/注册</a>
-								<ul>
-									<li><a href="#">退出登录</a></li>
-								</ul>
+								<%
+									if(session.getAttribute("user") == null){
+								%>	
+										<a href="login.jsp">登录/注册</a>
+								<% 
+									}else{
+								%>
+										<a href="user.jsp"><%= user.getName() %></a>
+										<ul>
+											<li><a href="LogoutAct">退出登录</a></li>
+										</ul>
+								<%	
+									}
+								%>
 							</li>
 						</ul>
 					</nav>
@@ -339,7 +355,7 @@
 						<!-- Content -->
 						<div class="recipe-box-content">
 							<h3>
-								<a href="getRecipePageAct?recipeId=8">牛腩煲</a>
+								<a href="getRecipePageAct?recipeId=1">牛腩煲</a>
 							</h3>
 
 							<div class="rating five-stars">

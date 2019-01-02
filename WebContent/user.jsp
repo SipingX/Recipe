@@ -6,28 +6,33 @@
 	User user=new User();
 	if(session.getAttribute("user")!=null){
 		user=(User)session.getAttribute("user");
+	}else{
+		response.sendRedirect("login.jsp");
 	}
 %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+
 <head>
 
-<!-- Basic Page Needs
+	<!-- Basic Page Needs
 ================================================== -->
-<meta charset="utf-8">
-<title>寻味环游记</title>
+	<meta charset="utf-8">
+	<title>寻味环游记</title>
 
-<!-- Mobile Specific Metas
+	<!-- Mobile Specific Metas
 ================================================== -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<!-- CSS
+	<!-- CSS
 ================================================== -->
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/colors/green.css" id="colors">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/colors/green.css" id="colors">
 
-<!--[if lt IE 9]>
+	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
@@ -35,199 +40,147 @@
 
 <body>
 
-<!-- Wrapper -->
-<div id="wrapper">
+	<!-- Wrapper -->
+	<div id="wrapper">
 
 
-<!-- Header
+		<!-- Header
 ================================================== -->
-<header id="header">
+		<header id="header">
 
-<!-- Container -->
-<div class="container">
+			<!-- Container -->
+			<div class="container">
 
-	<!-- Logo / Mobile Menu -->
-	<div class="three columns">
-		<div id="logo">
-			<h1><a href="index.html"><img src="images/logo.png" alt="Chow" /></a></h1>
-		</div>
-	</div>
+				<!-- Logo / Mobile Menu -->
+				<div class="three columns">
+					<div id="logo">
+						<h1>
+							<a href="index.html">
+								<img src="images/logo.png" alt="寻味环游记" />
+							</a>
+						</h1>
+					</div>
+				</div>
 
 
-<!-- Navigation
+				<!-- Navigation
 ================================================== -->
-<div class="thirteen columns navigation">
+				<div class="thirteen columns navigation">
 
-	<nav id="navigation" class="menu nav-collapse">
-		<ul>
-			<li>
-				<a href="index.jsp">主页</a>
-			</li>
-
-			<li>
-				<a href="recipe.jsp">食谱</a>
-			</li>
-
-			<li>
-				<a href="material.jsp" id="current">食材</a>
-			</li>
-
-			<li>
-				<a href="#">话题</a>
-			</li>
-
-			<li>
-				<a href="shop.jsp">购物</a>
-			</li>
-
-			<li>
-				<a href="recipe_submit.jsp">上传食谱</a>
-				<ul>
-					<li><a href="contact.jsp">联系我们</a></li>
-				</ul>
-			</li>
-			
-			<li>
-				<%
-					if(session.getAttribute("user") == null){
-				%>	
-						<a href="login.jsp">登录/注册</a>
-				<% 
-					}else{
-				%>
-						<a href="user.jsp"><%= user.getName() %></a>
+					<nav id="navigation" class="menu nav-collapse">
 						<ul>
-							<li><a href="LogoutAct">退出登录</a></li>
+							<li>
+								<a href="index.jsp">主页</a>
+							</li>
+
+							<li>
+								<a href="recipe.jsp">食谱</a>
+							</li>
+
+							<li>
+								<a href="material.jsp">食材</a>
+							</li>
+
+							<li>
+								<a href="#">话题</a>
+							</li>
+
+							<li>
+								<a href="shop.jsp">购物</a>
+							</li>
+
+							<li>
+								<a href="recipe_submit.jsp">上传食谱</a>
+								<ul>
+									<li><a href="contact.jsp">联系我们</a></li>
+								</ul>
+							</li>
+							
+							<li>
+								<a href="user.jsp" id="current"><%= user.getName() %></a>
+								<ul>
+									<li><a href="LogoutAct">退出登录</a></li>
+								</ul>
+							</li>
 						</ul>
-				<%	
-					}
-				%>
-			</li>
-		</ul>
-	</nav>
+					</nav>
 
-</div>
+				</div>
 
-</div>
-<!-- Container / End -->
-</header>
+			</div>
+			<!-- Container / End -->
+		</header>
 
-
-<!-- Recipe Background -->
-<div class="recipeBackground">
-	<img src="images/recipeBackground.jpg" alt="" />
-</div>
-
-
-<!-- Titlebar
+		<!-- Content
 ================================================== -->
+		<div class="container">
 
-<div class="margin-top-35"></div>
+			<!-- Masonry -->
+			<div class="twelve columns">
+
+				<!-- Headline -->
+				<h3 class="headline">我的主页</h3>
+				<span class="line rb margin-bottom-35"></span>
+				<div class="clearfix"></div>
+
+				<!-- Isotope -->
+				<div class="isotope">
+
+					<!-- Recipe #1 -->
+					<div class="10 recipe-box columns">
+
+						<!-- Thumbnail -->
+						<div class="thumbnail-holder">
+							<table>
+								<tr>
+									<td><img src="<%= user.getPortrait() %>" alt="" /></td>
+								</tr>
+								<tr>
+									<td>账号：</td>
+									<td><%= user.getId() %></td>
+								</tr>
+								<tr>
+									<td>昵称：</td>
+									<td><%= user.getName() %></td>
+								</tr>
+								<tr>
+									<td>性别：</td>
+									<td><%= user.getGender() %></td>
+								</tr>
+								<tr>
+									<td>年龄：</td>
+									<td><%= user.getAge() %></td>
+								</tr>
+								<tr>
+									<td>地址：</td>
+									<td><%= user.getAddress() %></td>
+								</tr>
+							</table>
+							<%
+								if(user.getRole().equals("admin")){
+							%>
+								<a href="ManageUserAct">管理用户</a>
+							<%
+								}
+							%>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+
+		</div>
+		<!-- Container / End -->
+
+		<div class="margin-top-5"></div>
 
 
-<!-- Container -->
-<div class="container">
-
-	<!-- Headline -->
-	<div class="sixteen columns">
- 		<h3 class="headline">肉食类</h3>
-		<span class="line margin-bottom-35"></span>
-		<div class="clearfix"></div>
 	</div>
-	<div class="clearfix"></div>
+	<!-- Wrapper / End -->
 
 
-		<!-- Isotope -->
-		<div class="isotope">
-
-			<!-- Recipe #1 -->
-			<div class="four isotope-box columns">
-
-				<!-- Thumbnail -->
-				<div class="thumbnail-holder">
-					<a href="material_page.jsp">
-						<img src="images/recipeThumb-09.jpg" alt=""/>
-						<div class="hover-cover"></div>
-						<div class="hover-icon">查看食谱</div>
-					</a>
-				</div>
-
-				<!-- Content -->
-				<div class="recipe-box-content">
-					<h3><a href="original-page-6.html">牛肉</a></h3>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-
-			<!-- Recipe #2 -->
-			<div class="four isotope-box columns">
-				<!-- Thumbnail -->
-				<div class="thumbnail-holder">
-					<a href="original-page-7.jsp">
-						<img src="images/recipeThumb-03.jpg" alt=""/>
-						<div class="hover-cover"></div>
-						<div class="hover-icon">查看食谱</div>
-					</a>
-				</div>
-
-				<!-- Content -->
-				<div class="recipe-box-content">
-					<h3><a href="original-page-7.jsp">鸡肉</a></h3>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-
-
-			<!-- Recipe #3 -->
-			<div class="four isotope-box columns">
-
-				<!-- Thumbnail -->
-				<div class="thumbnail-holder">
-					<a href="recipe-page-1.html">
-						<img src="images/recipeThumb-05.jpg" alt=""/>
-						<div class="hover-cover"></div>
-						<div class="hover-icon">查看食谱</div>
-					</a>
-				</div>
-
-				<!-- Content -->
-				<div class="recipe-box-content">
-					<h3><a href="original-page-6.html">猪肉</a></h3>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-		<!-- Pagination -->
-		<div class="sixteen columns">
-			<div class="pagination-container">
-				<nav class="pagination">
-					<ul>
-						<li><a href="#" class="current-page">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-					</ul>
-				</nav>
-
-				<nav class="pagination-next-prev">
-					<ul>
-						<li><a href="#" class="prev"></a></li>
-						<li><a href="#" class="next"></a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-
-</div>
-
-
-</div>
-<!-- Wrapper / End -->
-
-
-<!-- Footer
+	<!-- Footer
 ================================================== -->
 	<div id="footer">
 
@@ -251,7 +204,7 @@
 
 				<ul class="footer-links">
 					<li>
-						<a href="recipe.html">浏览食谱</a>
+						<a href="recipes.html">浏览食谱</a>
 					</li>
 					<li>
 						<a href="submit-recipe.html">上传食谱</a>
