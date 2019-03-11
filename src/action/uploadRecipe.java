@@ -26,6 +26,7 @@ import entity.Include;
 import entity.Picture;
 import entity.Recipe;
 import entity.Step;
+import entity.User;
 
 /**
  * Servlet implementation class uploadRecipe
@@ -133,7 +134,7 @@ public class uploadRecipe extends HttpServlet {
 							String fileName = item.getName();
 							
 							//控制文件类型
-							String ext = fileName.substring(fileName.indexOf(".")+1);
+							String ext = fileName.substring(fileName.lastIndexOf(".")+1);
 							if(!ext.equals("jpg")) {
 								System.out.println("图片类型有误！图片只能是jpg");
 								if(recbus.delete(recipe.getId())) {
@@ -155,7 +156,6 @@ public class uploadRecipe extends HttpServlet {
 							//定义文件路径：指定上传的位置（服务器路径），这里放到workplace下本工程的一个文件夹
 							String path = "D:\\Course\\Java\\workplace\\Recipe\\WebContent\\upload\\recipe\\picture";
 							System.out.println("文件保存路径："+path);
-							
 							//获取不包含路径的文件名
 							ext = fileName.substring(fileName.lastIndexOf("."));
 							fileName = "recipePhoto-"+recipe.getId()+"-"+picNo+ext;
@@ -205,7 +205,8 @@ public class uploadRecipe extends HttpServlet {
 		int i = 0;
 		
 		//上传食谱基本信息
-		recipe.setAuthor("17379506118");
+		
+		recipe.setAuthor(((User)request.getSession().getAttribute("user")).getId());
 		
 		result = recbus.upload(recipe);
 		if(result == 1) {

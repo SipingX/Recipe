@@ -146,7 +146,7 @@
 					<figure class="product">
 
 						<div class="mediaholder">
-							<a href="product-page.jsp">
+							<a href="product_page.jsp">
 								<img alt="" src="images/shop_item_01.jpg" />
 							</a>
 							<a href="#" class="product-button">
@@ -154,7 +154,7 @@
 							</a>
 						</div>
 
-						<a href="product-page.jsp">
+						<a href="product_page.jsp">
 							<section>
 								<span class="product-category">香料</span>
 								<h5>小豆蔻夹</h5>

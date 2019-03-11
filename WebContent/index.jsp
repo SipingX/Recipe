@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="java.util.*,entity.User,entity.Recipe"
+    import="java.util.*,entity.User,entity.Recipe,business.RecipeBusi"
 %>
 <%
 	List<Recipe> recipes_rec = new ArrayList<Recipe>();
@@ -12,6 +12,12 @@
 	User user=new User();
 	if(session.getAttribute("user")!=null){
 		user=(User)session.getAttribute("user");
+	}
+%>
+<%
+	Recipe latest_recipe = new Recipe();
+	if(request.getAttribute("latest_recipe") != null){
+		latest_recipe = (Recipe)request.getAttribute("latest_recipe");
 	}
 %>
 <!DOCTYPE html>
@@ -345,8 +351,8 @@
 
 						<!-- Thumbnail -->
 						<div class="thumbnail-holder">
-							<a href="getRecipePageAct?recipeId=1">
-								<img src="images/recipeThumb-09.jpg" alt="" />
+							<a href="getRecipePageAct?recipeId=<%= latest_recipe.getId() %>">
+								<img src="<%= latest_recipe.getPictures(1) %>" alt="" />
 								<div class="hover-cover"></div>
 								<div class="hover-icon">查看食谱</div>
 							</a>
@@ -355,16 +361,16 @@
 						<!-- Content -->
 						<div class="recipe-box-content">
 							<h3>
-								<a href="getRecipePageAct?recipeId=1">牛腩煲</a>
+								<a href="getRecipePageAct?recipeId=<%= latest_recipe.getId() %>"><%= latest_recipe.getName() %></a>
 							</h3>
 
-							<div class="rating five-stars">
+							<div class="<%= latest_recipe.getRating() %>">
 								<div class="star-rating"></div>
 								<div class="star-bg"></div>
 							</div>
 
 							<div class="recipe-meta">
-								<i class="fa fa-clock-o"></i> 2 小时 30 分钟</div>
+								<i class="fa fa-clock-o"></i><%= latest_recipe.getMinute() %>分钟</div>
 
 							<div class="clearfix"></div>
 						</div>
@@ -385,7 +391,7 @@
 						<!-- Content -->
 						<div class="recipe-box-content">
 							<h3>
-								<a href="recipe-page-2.html">巧克力冰淇淋蛋糕</a>
+								<a href="getRecipePageAct?recipeId=1">巧克力冰淇淋蛋糕</a>
 							</h3>
 
 							<div class="rating four-stars">

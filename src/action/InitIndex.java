@@ -44,7 +44,13 @@ public class InitIndex extends HttpServlet {
 			list.add(recipe);
 		}
 		
+		Recipe latest_recipe = new Recipe();
+		latest_recipe.setId(recb.getMaxId());
+		latest_recipe = recb.getRecipePageInfo(latest_recipe);
+		latest_recipe.setPictures();
+		
 		request.setAttribute("recipes_recommended", list);
+		request.setAttribute("latest_recipe", latest_recipe);
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
