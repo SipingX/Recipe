@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import dao.DAO;
@@ -21,9 +20,8 @@ public class PictureBusi {
 	private String sql = "";
 	Object a[] = null;
 	
-	public Iterator<Picture> getPicture(Recipe recipe){
-		List<Picture> list = null;
-		Iterator<Picture> listall = null;
+	public List<Picture> getPicture(Recipe recipe){
+		List<Picture> list = new ArrayList<Picture>();
 		a = new Object[1];
 		sql="select number,url from r_picture where recipe = ? ;";
 		a[0] = recipe.getId();
@@ -31,7 +29,6 @@ public class PictureBusi {
 			con = DAO.getConnection();
 			ppst = DAO.getPreparedStatement(con, sql, a);
 			rs = DAO.getResultSet(ppst);
-			list = new ArrayList<Picture>();
 			while(rs.next()){	
 				Picture picture = new Picture();
 				picture.setNumber(rs.getInt(1));
@@ -43,9 +40,8 @@ public class PictureBusi {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		listall = list.iterator();
 		
-		return listall;
+		return list;
 	} 
 	
 	public int upload(Picture picture) {

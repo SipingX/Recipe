@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="java.util.*,entity.User"
+%>
+<%
+	User user=new User();
+	if(session.getAttribute("user")!=null){
+		user=(User)session.getAttribute("user");
+	}
+%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -53,30 +61,47 @@
 	<nav id="navigation" class="menu nav-collapse">
 		<ul>
 			<li>
-				<a href="index.html">主页</a>
+				<a href="index.jsp">主页</a>
 			</li>
-
+	
 			<li>
-				<a href="recipe.html">食谱</a>
+				<a href="recipe.jsp">食谱</a>
 			</li>
-
+	
 			<li>
-				<a href="original.html" id="current">食材</a>
+				<a href="material.jsp" id="current">食材</a>
 			</li>
-
+	
 			<li>
 				<a href="#">话题</a>
 			</li>
-
+	
 			<li>
-				<a href="shop.html">购物</a>
+				<a href="shop.jsp">购物</a>
 			</li>
-
+	
 			<li>
-				<a href="submit-recipe.html">上传食谱</a>
+				<a href="recipe_submit.jsp">上传食谱</a>
 				<ul>
-					<li><a href="contact.html">联系我们</a></li>
+					<li><a href="contact.jsp">联系我们</a></li>
 				</ul>
+			</li>
+			
+			<li>
+				<%
+					if(session.getAttribute("user") == null){
+				%>	
+						<a href="login.jsp">登录/注册</a>
+				<% 
+					}else{
+				%>
+						<a href="user.jsp"><%= user.getName() %></a>
+						<ul>
+							<li><a href="LogoutAct">退出登录</a></li>
+						</ul>
+				<%	
+					}
+				%>
 			</li>
 		</ul>
 	</nav>
@@ -97,7 +122,23 @@
 <!-- Titlebar
 ================================================== -->
 
-<div class="margin-top-35"></div>
+<!-- Container -->
+<div class="container">
+
+	<!-- Headline -->
+	<div class="sixteen columns">
+ 		<h3 class="headline">牛肉选购注意事项</h3>
+		<span class="line margin-bottom-35"></span>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+<p>挑选牛肉之“看、摸、闻”：<br>
+1、观察颜色。正常新鲜的牛肉肌肉呈暗红色，均匀、有光泽、外表微干，尤其在冬季其表面容易形成一层薄薄的风干膜，脂肪呈白色或奶油色。而不新鲜的牛肉的肌肉颜色发暗，无光泽，脂肪呈现黄绿色；<br>
+2、摸手感。新鲜的牛肉富有弹性，指压后凹陷可立即恢复，新切面肌纤维细密。不新鲜的牛肉指压后凹陷不能恢复，留有明显压痕；<br>
+3、闻气味。新鲜肉具有鲜肉味儿。不新鲜的牛肉有异味甚至臭味。<br>
+如今食品安全令人担忧，各种造假无处不在，牛肉也没能幸免。在这里简单向大家介绍牛肉的真假识别方法：<br>
+1、如何识别新鲜牛肉？新鲜牛肉质地坚实有弹性，肉色呈鲜红色，肌纤维较细。嫩牛肉脂肪呈白色，反之肉色深红，触摸肉皮粗糙者多为老牛肉， 不要购买。<br>
+2、如何识别注水牛肉？牛肉注水后，肉纤维更显粗糙，暴露纤维明显；因为注水，使牛肉有鲜嫩感，但仔细观察肉面，常有水分渗出；用手摸肉，不粘手，湿感重；用干纸巾在牛肉表面，纸很快即被湿透。而正常牛肉手摸不粘手，纸贴不透湿。</p>
 
 
 <!-- Container -->
@@ -105,7 +146,7 @@
 
 	<!-- Headline -->
 	<div class="sixteen columns">
- 		<h3 class="headline">肉食类</h3>
+ 		<h3 class="headline">食谱</h3>
 		<span class="line margin-bottom-35"></span>
 		<div class="clearfix"></div>
 	</div>
@@ -120,7 +161,7 @@
 
 				<!-- Thumbnail -->
 				<div class="thumbnail-holder">
-					<a href="original-page-6.html">
+					<a href="getRecipePageAct?recipeId=1">
 						<img src="images/recipeThumb-09.jpg" alt=""/>
 						<div class="hover-cover"></div>
 						<div class="hover-icon">查看食谱</div>
@@ -129,108 +170,19 @@
 
 				<!-- Content -->
 				<div class="recipe-box-content">
-					<h3><a href="original-page-6.html">牛肉</a></h3>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-
-			<!-- Recipe #2 -->
-			<div class="four isotope-box columns">
-				<!-- Thumbnail -->
-				<div class="thumbnail-holder">
-					<a href="original-page-7.jsp">
-						<img src="images/recipeThumb-03.jpg" alt=""/>
-						<div class="hover-cover"></div>
-						<div class="hover-icon">查看食谱</div>
-					</a>
-				</div>
-
-				<!-- Content -->
-				<div class="recipe-box-content">
-					<h3><a href="original-page-7.jsp">鸡肉</a></h3>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-
-
-			<!-- Recipe #3 -->
-			<div class="four isotope-box columns">
-
-				<!-- Thumbnail -->
-				<div class="thumbnail-holder">
-					<a href="recipe-page-1.html">
-						<img src="images/recipeThumb-05.jpg" alt=""/>
-						<div class="hover-cover"></div>
-						<div class="hover-icon">查看食谱</div>
-					</a>
-				</div>
-
-				<!-- Content -->
-				<div class="recipe-box-content">
-					<h3><a href="original-page-6.html">猪肉</a></h3>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-
-
-			<!-- Recipe #4 -->
-			<div class="four isotope-box columns">
-
-				<!-- Thumbnail -->
-				<div class="thumbnail-holder">
-					<a href="recipe-page-2.html">
-						<img src="images/recipeThumb-06.jpg" alt=""/>
-						<div class="hover-cover"></div>
-						<div class="hover-icon">View Recipe</div>
-					</a>
-				</div>
-
-				<!-- Content -->
-				<div class="recipe-box-content">
-					<h3><a href="recipe-page-2.html">红烧鸡翅</a></h3>
+					<h3><a href="getRecipePageAct?recipeId=1">牛腩煲</a></h3>
 
 					<div class="rating five-stars">
 						<div class="star-rating"></div>
 						<div class="star-bg"></div>
 					</div>
 
-					<div class="recipe-meta"><i class="fa fa-clock-o"></i> 45 分钟</div>
+					<div class="recipe-meta"><i class="fa fa-clock-o"></i> 2 小时</div>
 
 					<div class="clearfix"></div>
 				</div>
 			</div>
-
-			<!-- Recipe #5 -->
-			<div class="four isotope-box columns">
-
-				<!-- Thumbnail -->
-				<div class="thumbnail-holder">
-					<a href="recipe-page-1.html">
-						<img src="images/recipeThumb-07.jpg" alt=""/>
-						<div class="hover-cover"></div>
-						<div class="hover-icon">View Recipe</div>
-					</a>
-				</div>
-
-				<!-- Content -->
-				<div class="recipe-box-content">
-					<h3><a href="recipe-page-1.html">柠檬咖喱鸡</a></h3>
-
-					<div class="rating five-stars">
-						<div class="star-rating"></div>
-						<div class="star-bg"></div>
-					</div>
-
-					<div class="recipe-meta"><i class="fa fa-clock-o"></i> 1 小时 20 分钟</div>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-
-
+		</div>	
 		<!-- Pagination -->
 		<div class="sixteen columns">
 			<div class="pagination-container">

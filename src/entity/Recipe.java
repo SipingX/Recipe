@@ -1,5 +1,9 @@
 package entity;
 
+import java.util.List;
+
+import business.PictureBusi;
+
 public class Recipe {
 	
 	private int id;
@@ -15,6 +19,8 @@ public class Recipe {
 	private String method;
 	private String description;
 	private String address;
+	
+	private List<Picture> pictures;
 	
 	public void setId(int id) {
 		this.id=id;
@@ -105,6 +111,15 @@ public class Recipe {
 	}
 	public String getAddress() {
 		return this.address;
+	}
+	
+	public void setPictures() {
+		PictureBusi picb = new PictureBusi();
+		this.pictures = picb.getPicture(this);
+	}
+	
+	public Picture getPictures(int number) {
+		return this.pictures.get(number);
 	}
 	
 }

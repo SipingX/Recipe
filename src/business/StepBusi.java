@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import dao.DAO;
@@ -21,9 +20,8 @@ public class StepBusi {
 	private String sql = "";
 	Object a[] = null;
 	
-	public Iterator<Step> getStep(Recipe recipe){
-		List<Step> list = null;
-		Iterator<Step> listall = null;
+	public List<Step> getStep(Recipe recipe){
+		List<Step> list = new ArrayList<Step>();
 		a = new Object[1];
 		sql="select sequence,description,picture from step where recipe = ?;";
 		a[0] = recipe.getId();
@@ -31,7 +29,6 @@ public class StepBusi {
 			con = DAO.getConnection();
 			ppst = DAO.getPreparedStatement(con, sql, a);
 			rs = DAO.getResultSet(ppst);
-			list = new ArrayList<Step>();
 			while(rs.next()){	
 				Step step = new Step();
 				step.setSequence(rs.getInt(1));
@@ -44,9 +41,8 @@ public class StepBusi {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		listall = list.iterator();
 		
-		return listall;
+		return list;
 	} 
 	
 	public int upload(Step step) {

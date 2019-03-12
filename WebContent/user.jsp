@@ -92,25 +92,15 @@
 							<li>
 								<a href="recipe_submit.jsp">上传食谱</a>
 								<ul>
-									<li><a href="contact.jsp" id="current">联系我们</a></li>
+									<li><a href="contact.jsp">联系我们</a></li>
 								</ul>
 							</li>
 							
 							<li>
-								<%
-									if(session.getAttribute("user") == null){
-								%>	
-										<a href="login.jsp">登录/注册</a>
-								<% 
-									}else{
-								%>
-										<a href="user.jsp"><%= user.getName() %></a>
-										<ul>
-											<li><a href="LogoutAct">退出登录</a></li>
-										</ul>
-								<%	
-									}
-								%>
+								<a href="user.jsp" id="current"><%= user.getName() %></a>
+								<ul>
+									<li><a href="LogoutAct">退出登录</a></li>
+								</ul>
 							</li>
 						</ul>
 					</nav>
@@ -121,144 +111,78 @@
 			<!-- Container / End -->
 		</header>
 
-<!-- Titlebar
+		<!-- Content
 ================================================== -->
-<section id="titlebar">
-	<!-- Container -->
-	<div class="container">
+		<div class="container">
 
-		<div class="eight columns">
-			<h2>联系我们</h2>
-		</div>
+			<!-- Masonry -->
+			<div class="twelve columns">
 
-		<div class="eight columns">
-			<nav id="breadcrumbs">
-				<ul>
-					<li>你在这里:</li>
-					<li><a href="#">主页</a></li>
-					<li>联系我们</li>
-				</ul>
-			</nav>
-		</div>
-
-	</div>
-	<!-- Container / End -->
-</section>
-
-
-
-<!-- Content
-================================================== -->
-
-<!-- Container -->
-<div class="container">
-	<div class="sixteen columns">
-		<div class="image-with-caption contact">
-			<img class="rsImg" src="images/contact.jpg" alt="" />
-			<span>有问题的话请联系我们</span>
-		</div>
-	</div>
-</div>
-<!-- Container / End -->
-
-
-<div class="margin-top-10"></div>
-
-
-<!-- Container -->
-<div class="container">
-
-<!-- Contact Form -->
-<div class="twelve columns">
-		<h3 class="headline">联系表</h3><span class="line margin-bottom-25"></span><div class="clearfix"></div>
-
-		<!-- Contact Form -->
-		<section id="contact">
-
-			<!-- Success Message -->
-			<mark id="message"></mark>
-
-			<!-- Form -->
-			<form method="post" name="contactform" id="contactform">
-
-				<fieldset>
-
-					<div>
-						<label>姓名:</label>
-						<input name="name" type="text" id="name" />
-					</div>
-
-					<div>
-						<label >Email: <span>*</span></label>
-						<input name="email" type="email" id="email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />
-					</div>
-
-					<div>
-						<label>消息: <span>*</span></label>
-						<textarea name="comment" cols="40" rows="3" id="comment" spellcheck="true"></textarea>
-					</div>
-
-				</fieldset>
-				<div id="result"></div>
-				<input type="submit" class="submit" id="submit" value="发送消息" />
+				<!-- Headline -->
+				<h3 class="headline">我的主页</h3>
+				<span class="line rb margin-bottom-35"></span>
 				<div class="clearfix"></div>
-			</form>
 
-		</section>
-		<!-- Contact Form / End -->
-		<div class="margin-bottom-50"></div>
-</div>
+				<!-- Isotope -->
+				<div class="isotope">
+
+					<!-- Recipe #1 -->
+					<div class="10 recipe-box columns">
+
+						<!-- Thumbnail -->
+						<div class="thumbnail-holder">
+							<table>
+								<tr>
+									<td><img src="<%= user.getPortrait() %>" alt="" /></td>
+								</tr>
+								<tr>
+									<td>账号：</td>
+									<td><%= user.getId() %></td>
+								</tr>
+								<tr>
+									<td>昵称：</td>
+									<td><%= user.getName() %></td>
+								</tr>
+								<tr>
+									<td>性别：</td>
+									<td><%= user.getGender() %></td>
+								</tr>
+								<tr>
+									<td>年龄：</td>
+									<td><%= user.getAge() %></td>
+								</tr>
+								<tr>
+									<td>地址：</td>
+									<td><%= user.getAddress() %></td>
+								</tr>
+							</table>
+							<%
+								if(user.getRole().equals("admin")){
+							%>
+								<a href="ManageUserAct">管理用户</a>
+							<%
+								}
+							%>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+
+		</div>
+		<!-- Container / End -->
+
+		<div class="margin-top-5"></div>
 
 
-<div class="four columns">
-
-	<!-- Share -->
-	<div class="widget">
-		<h4 class="headline">分享</h4>
-		<span class="line margin-bottom-30"></span>
-		<div class="clearfix"></div>
-		
-		<ul class="share-buttons">
-			<li class="facebook-share">
-				<a href="#">
-					<span class="counter">1,234</span>
-					<span class="counted">粉丝</span>
-					<span class="action-button">点赞</span>
-				</a>
-			</li>
-
-			<li class="twitter-share">
-				<a href="#">
-					<span class="counter">863</span>
-					<span class="counted">粉丝</span>
-					<span class="action-button">关注</span>
-				</a>
-			</li>
-
-			<li class="google-plus-share">
-				<a href="#">
-					<span class="counter">902</span>
-					<span class="counted">粉丝</span>
-					<span class="action-button">关注</span>
-				</a>
-			</li>
-		</ul>
-		<div class="clearfix"></div>
 	</div>
-
-</div>
-
-</div>
-<!-- Container / End -->
+	<!-- Wrapper / End -->
 
 
-</div>
-<!-- Wrapper / End -->
-
-
-<!-- Footer
+	<!-- Footer
 ================================================== -->
-<div id="footer">
+	<div id="footer">
 
 		<!-- Container -->
 		<div class="container">

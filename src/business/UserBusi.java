@@ -46,8 +46,36 @@ public class UserBusi {
 		rs_2 = DAO.update(ppst);
 		DAO.closeConnection(con);
 		
-		System.out.println("±íuser "+rs_2+" ÐÐÊÜÓ°Ïì");
+		System.out.println("ï¿½ï¿½user "+rs_2+" ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½");
 		return rs_2;
 	}
 
+	public User getAllInfo(String id) {
+		sql = "select * from user where id = ? ;";
+		User user = new User();
+		user.setId(id);
+		Object a[] = new Object[1];
+		a[0] = user.getId();
+		try {
+			con = DAO.getConnection();
+			ppst = DAO.getPreparedStatement(con, sql, a);
+			rs = DAO.getResultSet(ppst);
+			while(rs.next()) {
+				user.setPassword(rs.getString("password"));
+				user.setRole(rs.getString("role"));
+				user.setName(rs.getString("name"));
+				user.setGender(rs.getString("gender"));
+				user.setAge(rs.getInt("age"));
+				user.setPortrait(rs.getString("portrait"));
+				user.setAddress(rs.getString("address"));
+			}
+			DAO.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+	
 }

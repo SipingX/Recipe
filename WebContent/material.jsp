@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="java.util.*,entity.User"
+%>
+<%
+	User user=new User();
+	if(session.getAttribute("user")!=null){
+		user=(User)session.getAttribute("user");
+	}
+%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -53,30 +61,47 @@
 	<nav id="navigation" class="menu nav-collapse">
 		<ul>
 			<li>
-				<a href="index.html">主页</a>
+				<a href="index.jsp">主页</a>
 			</li>
-
+	
 			<li>
-				<a href="recipe.html">食谱</a>
+				<a href="recipe.jsp">食谱</a>
 			</li>
-
+	
 			<li>
-				<a href="original.html" id="current">食材</a>
+				<a href="material.jsp" id="current">食材</a>
 			</li>
-
+	
 			<li>
 				<a href="#">话题</a>
 			</li>
-
+	
 			<li>
-				<a href="shop.html">购物</a>
+				<a href="shop.jsp">购物</a>
 			</li>
-
+	
 			<li>
-				<a href="submit-recipe.html">上传食谱</a>
+				<a href="recipe_submit.jsp">上传食谱</a>
 				<ul>
-					<li><a href="contact.html">联系我们</a></li>
+					<li><a href="contact.jsp">联系我们</a></li>
 				</ul>
+			</li>
+			
+			<li>
+				<%
+					if(session.getAttribute("user") == null){
+				%>	
+						<a href="login.jsp">登录/注册</a>
+				<% 
+					}else{
+				%>
+						<a href="user.jsp"><%= user.getName() %></a>
+						<ul>
+							<li><a href="LogoutAct">退出登录</a></li>
+						</ul>
+				<%	
+					}
+				%>
 			</li>
 		</ul>
 	</nav>
@@ -114,7 +139,7 @@
 
 				<!-- Thumbnail -->
 				<div class="thumbnail-holder">
-					<a href="original-page-1.html">
+					<a href="material_group.jsp">
 						<img src="images/recipeThumb-09.jpg" alt=""/>
 						<div class="hover-cover"></div>
 						<div class="hover-icon">查看分类</div>
@@ -137,7 +162,7 @@
 				<!-- Thumbnail -->
 				<div class="thumbnail-holder">
 					<a href="original-page-2.html">
-						<img src="images/yu1.jpg" alt=""/>
+						<img src="images/sliderB_07.jpg" alt=""/>
 						<div class="hover-cover"></div>
 						<div class="hover-icon">查看分类</div>
 					</a>
@@ -267,11 +292,11 @@
 		<div class="clearfix"></div>
 
 		<ul class="categories">
-			<li><a href="#">早餐 <span>(2)</span></a></li>
-			<li><a href="#">正餐 <span>(2)</span></a></li>
-			<li><a href="#">汤类 <span>(2)</span></a></li>
-			<li><a href="#">饭前小菜 <span>(2)</span></a></li>
-			<li><a href="#">饭后甜点 <span>(2)</span></a></li>
+			<li><a href="#">根茎类<span>(2)</span></a></li>
+			<li><a href="#">茎叶类<span>(2)</span></a></li>
+			<li><a href="#">果实类<span>(2)</span></a></li>
+			<li><a href="#">调料<span>(2)</span></a></li>
+			<li><a href="#">食用油<span>(2)</span></a></li>
 		</ul>
 	</div>
 

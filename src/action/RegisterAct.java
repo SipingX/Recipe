@@ -45,20 +45,30 @@ public class RegisterAct extends HttpServlet {
 		UserBusi userbusi = new UserBusi();
 		int rs = 0;
 		String html; 
-		user.setId(request.getParameter("userId").trim());
-		user.setPassword(request.getParameter("userPsd").trim());
-		try {
-			rs = userbusi.register(user);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(rs == 1) {
-			response.sendRedirect("login.jsp");
-		}else {
-			html="注册失败！<br><a href='login.jsp'>重新注册</a>";
+//		String vali = request.getParameter("vali");
+		
+/*		if(vali.equals(request.getSession().getAttribute("valiNum"))){
+			System.out.println("号码验证通过！");*/
+			
+			user.setId(request.getParameter("userId_2").trim());
+			user.setPassword(request.getParameter("userPsd").trim());
+			
+			try {
+				rs = userbusi.register(user);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(rs == 1) {
+				response.sendRedirect("login.jsp");
+			}else {
+				html="注册失败！<br><a href='login.jsp'>重新注册</a>";
+				response.getWriter().write(html);
+			}
+/*		}else{
+			html="号码验证失败！<br><a href='login.jsp'>返回注册</a>";
 			response.getWriter().write(html);
-		}
+		}*/
 	}
 
 }

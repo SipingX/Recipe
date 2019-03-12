@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="java.util.*,entity.User"%>
+<%
+	User user=new User();
+	if(session.getAttribute("user")!=null){
+		user=(User)session.getAttribute("user");
+	}
+%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -7,6 +14,7 @@
 <!--<![endif]-->
 
 <head>
+	<script type="text/javascript" src="js/jquery-1.4.2.js"></script>
 	<script type="text/javascript">
 		function loginCheck()
         {
@@ -24,6 +32,15 @@
 			}
 			return true;
         }
+		
+		function send(){
+			$.ajax({  
+				url: "sendMsg",  
+				type: "post",  
+				dataType: "json",  
+				data: {'value': $("input[name='userId_2']").val()},
+			});  
+		}
     </script>
 
 	<!-- Basic Page Needs
@@ -78,15 +95,15 @@
 					<nav id="navigation" class="menu nav-collapse">
 						<ul>
 							<li>
-								<a href="index.html">主页</a>
+								<a href="index.jsp">主页</a>
 							</li>
 
 							<li>
-								<a href="recipe.html">食谱</a>
+								<a href="recipe.jsp">食谱</a>
 							</li>
 
 							<li>
-								<a href="original.html">食材</a>
+								<a href="material.jsp">食材</a>
 							</li>
 
 							<li>
@@ -94,21 +111,18 @@
 							</li>
 
 							<li>
-								<a href="shop.html">购物</a>
+								<a href="shop.jsp">购物</a>
 							</li>
 
 							<li>
-								<a href="submit-recipe.html">上传食谱</a>
+								<a href="recipe_submit.jsp">上传食谱</a>
 								<ul>
-									<li><a href="contact.html">联系我们</a></li>
+									<li><a href="contact.jsp">联系我们</a></li>
 								</ul>
 							</li>
 							
 							<li>
-								<a href="login.html" id="current">登录/注册</a>
-								<ul>
-									<li><a href="#">退出登录</a></li>
-								</ul>
+								<a href="login.jsp" id="current">登录/注册</a>
 							</li>
 						</ul>
 					</nav>
@@ -185,13 +199,13 @@
 		                <li>
 		                    <label for="user"  class="input-tips2">手机号：</label>
 		                    <div class="inputOuter2">
-		                        <input type="text" id="user" name="userId" maxlength="16" class="inputstyle2"/>
+		                        <input type="text" id="user" name="userId_2" maxlength="16" class="inputstyle2"/>
 		                    </div>
 		                </li>
 										
 										<li>
 												<div class="inputArea">
-														<input type="button" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="发送验证码"/> 
+														<input type="button" onclick="send()" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="发送验证码"/> 
 												</div>
 												
 										</li><div class="cl"></div>
@@ -199,7 +213,7 @@
 										<li>
 												<label for="user"  class="input-tips2">验证码：</label>
 												<div class="inputOuter2">
-														<input type="text" id="user" name="user" maxlength="16" class="inputstyle2"/>
+														<input type="text" id="user" name="vali" maxlength="16" class="inputstyle2"/>
 												</div>
 										</li>
 		                

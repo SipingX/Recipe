@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import dao.DAO;
@@ -21,9 +20,8 @@ public class IncludeBusi {
 	private String sql = "";
 	Object a[] = null;
 	
-	public Iterator<Include> getInclude(Recipe recipe){
-		List<Include> list = null;
-		Iterator<Include> listall = null;
+	public List<Include> getInclude(Recipe recipe){
+		List<Include> list = new ArrayList<Include>();
 		a = new Object[1];
 		sql="select include.material,material.name,include.quantity "
 				+ "from include,material "
@@ -33,7 +31,6 @@ public class IncludeBusi {
 			con = DAO.getConnection();
 			ppst = DAO.getPreparedStatement(con, sql, a);
 			rs = DAO.getResultSet(ppst);
-			list = new ArrayList<Include>();
 			while(rs.next()){	
 				Include include=new Include();
 				include.setMaterial(rs.getInt(1));
@@ -46,9 +43,8 @@ public class IncludeBusi {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		listall = list.iterator();
 		
-		return listall;
+		return list;
 	} 
 	
 	public int upload(Include include) {

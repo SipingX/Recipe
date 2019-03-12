@@ -15,7 +15,7 @@ import entity.User;
 /**
  * Servlet implementation class manageUserAct
  */
-@WebServlet("/manageUserAct")
+@WebServlet("/ManageUserAct")
 public class ManageUserAct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -65,7 +65,7 @@ public class ManageUserAct extends HttpServlet {
 		request.setAttribute("userlist", userlist);
 		request.setAttribute("pagecount",pagecount);
 
-		request.getRequestDispatcher("user.jsp").forward(request, response);
+		request.getRequestDispatcher("user_manage.jsp").forward(request, response);
 	}
 
 	/**
