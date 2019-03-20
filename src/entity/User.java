@@ -66,5 +66,5 @@ public class User {
 	public String getAddress() {
 		return this.address;
 	}
-
+	
 }

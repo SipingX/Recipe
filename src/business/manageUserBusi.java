@@ -1,23 +1,18 @@
 package business;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 
-import dao.DAO;
+import org.apache.ibatis.session.SqlSession;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.util.MybatisUtils;
+
 import entity.User;
 
 public class manageUserBusi {
 	
-	private Connection con = null;
-	private PreparedStatement ppst = null;
-	private ResultSet rs = null;
-//	private int rs_2 = 0;
-	private String sql = "";
-	Object a[] = null;
-	
-	public int getUserCount() throws SQLException {
+/*	public int getUserCount() throws SQLException {
 		int count = 0;
 		sql = "select count(*) from user;";
 		a = new Object[0];
@@ -29,9 +24,9 @@ public class manageUserBusi {
 		}
 		DAO.closeConnection(con);
 		return count;
-	}
+	}*/
 	
-	public User[] getUserList(int page,int pagesize) throws SQLException{
+/*	public User[] getUserList(int page,int pagesize) throws SQLException{
 		User list[] = new User[pagesize];
 		int i=0;
 		
@@ -52,6 +47,19 @@ public class manageUserBusi {
 		}
 		DAO.closeConnection(con);
 		return list;
+	}*/
+	
+	public PageInfo<User> getUserList(int page,int pagesize) throws Exception{
+		SqlSession sqlSession = MybatisUtils.getSession();
+		try {
+			PageHelper.startPage(page, pagesize);//要第一页的二条记录
+			List<User> users = sqlSession.selectList("mapper.UserMapper.selectUser");
+			PageInfo<User> pageInfo = new PageInfo<User>(users);
+			return pageInfo;
+		}finally {
+			// 5、关闭SqlSession
+			sqlSession.close();
+		}
 	}
 
 }

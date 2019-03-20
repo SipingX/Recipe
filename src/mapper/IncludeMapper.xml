@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.IncludeMapper">
+	
+	<select id="selectIncludeByRecipeId" parameterType="Recipe"
+		resultType="Include">
+		select include.material,material.name,include.quantity 
+		from include,material 
+		where include.material=material.id and include.recipe = #{id}
+	</select>
+	
+	<insert id="insertInclude" parameterType="Include">
+		insert into include (recipe,material,quantity)
+		values(#{recipe},#{material},#{quantity})
+	</insert>
+	
+</mapper>

@@ -1,33 +1,23 @@
 package business;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import dao.DAO;
+import org.apache.ibatis.session.SqlSession;
+
+import com.util.MybatisUtils;
+
 import entity.User;
 
 public class UserBusi {
 	
-	private Connection con = null;
-	private PreparedStatement ppst = null;
-	private ResultSet rs = null;
-	private int rs_2;
-	private String sql = "";
-	
 	public int login(User user) throws SQLException {
-		sql = "select password from user where id=?";
 		String pass = "";
-		Object a[] = new Object[1];
-		a[0] = user.getId();
-		con = DAO.getConnection();
-		ppst = DAO.getPreparedStatement(con, sql, a);
-		rs = DAO.getResultSet(ppst);
-		while(rs.next()) {
-			pass = rs.getString(1);
+		SqlSession sqlSession = MybatisUtils.getSession();
+		try {
+			pass = sqlSession.selectOne("mapper.UserMapper.selectPassword",user);
+		}finally{
+			sqlSession.close();
 		}
-		DAO.closeConnection(con);
 		
 		if(pass.equals(user.getPassword())) {
 			return 1;
@@ -37,42 +27,30 @@ public class UserBusi {
 	}
 	
 	public int register(User user) throws SQLException {
-		sql = "insert into user (id,password) values(?,?);";
-		Object a[] = new Object[2];
-		a[0] = user.getId();
-		a[1] = user.getPassword();
-		con = DAO.getConnection();
-		ppst = DAO.getPreparedStatement(con, sql, a);
-		rs_2 = DAO.update(ppst);
-		DAO.closeConnection(con);
+		int r = 0;
+		SqlSession sqlSession = MybatisUtils.getSession();
+		try {
+			r = sqlSession.insert("mapper.UserMapper.insertUser",user);
+		    if(r == 1){
+		        System.out.println("您成功插入了 "+r+" 个用户！");
+		        sqlSession.commit();
+		    }else{
+		        System.out.println("执行插入用户操作失败！！！");
+		    }
+		}finally{
+			sqlSession.close();
+		}
 		
-		System.out.println("锟斤拷user "+rs_2+" 锟斤拷锟斤拷影锟斤拷");
-		return rs_2;
+		return r;
 	}
 
-	public User getAllInfo(String id) {
-		sql = "select * from user where id = ? ;";
-		User user = new User();
-		user.setId(id);
-		Object a[] = new Object[1];
-		a[0] = user.getId();
+	public User getAllInfo(User user) {
+		
+		SqlSession sqlSession = MybatisUtils.getSession();
 		try {
-			con = DAO.getConnection();
-			ppst = DAO.getPreparedStatement(con, sql, a);
-			rs = DAO.getResultSet(ppst);
-			while(rs.next()) {
-				user.setPassword(rs.getString("password"));
-				user.setRole(rs.getString("role"));
-				user.setName(rs.getString("name"));
-				user.setGender(rs.getString("gender"));
-				user.setAge(rs.getInt("age"));
-				user.setPortrait(rs.getString("portrait"));
-				user.setAddress(rs.getString("address"));
-			}
-			DAO.closeConnection(con);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			user = sqlSession.selectOne("mapper.UserMapper.selectUser",user);
+		}finally{
+			sqlSession.close();
 		}
 		
 		return user;

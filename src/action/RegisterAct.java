@@ -52,6 +52,7 @@ public class RegisterAct extends HttpServlet {
 			
 			user.setId(request.getParameter("userId_2").trim());
 			user.setPassword(request.getParameter("userPsd").trim());
+			System.out.println("×¢²áÓÃ»§ID£º"+user.getId()+"  ÃÜÂë£º"+user.getPassword());
 			
 			try {
 				rs = userbusi.register(user);

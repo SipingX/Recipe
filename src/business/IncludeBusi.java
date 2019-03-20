@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import com.util.MybatisUtils;
+
 import dao.DAO;
 import entity.Include;
 import entity.Recipe;
@@ -22,7 +26,7 @@ public class IncludeBusi {
 	
 	public List<Include> getInclude(Recipe recipe){
 		List<Include> list = new ArrayList<Include>();
-		a = new Object[1];
+/*		a = new Object[1];
 		sql="select include.material,material.name,include.quantity "
 				+ "from include,material "
 				+ "where include.material=material.id and include.recipe = ? ;";
@@ -42,6 +46,14 @@ public class IncludeBusi {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}*/
+		
+		
+		SqlSession sqlSession = MybatisUtils.getSession();
+		try {
+			list = sqlSession.selectList("mapper.IncludeMapper.selectIncludeByRecipeId",recipe);
+		}finally {
+			sqlSession.close();
 		}
 		
 		return list;
@@ -49,7 +61,7 @@ public class IncludeBusi {
 	
 	public int upload(Include include) {
 		int r = 0;
-		sql = "insert \r\n" + 
+/*		sql = "insert \r\n" + 
 				"into include (recipe,material,quantity)\r\n" + 
 				"value(?,?,?);";
 		a = new Object[3];
@@ -64,7 +76,20 @@ public class IncludeBusi {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		r = rs_2;
+		r = rs_2;*/
+		
+		SqlSession sqlSession = MybatisUtils.getSession();
+		try {
+			r = sqlSession.insert("mapper.IncludeMapper.insertInclude",include);
+			if(r == 1){
+		        System.out.println("您成功插入了 "+r+" 份食谱Include！");
+		        sqlSession.commit();
+		    }else{
+		        System.out.println("执行插入食谱Include操作失败！！！");
+		    }
+		}finally {
+			sqlSession.close();
+		}
 		
 		return r;
 	}

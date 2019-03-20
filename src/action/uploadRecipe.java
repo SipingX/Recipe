@@ -56,10 +56,10 @@ public class uploadRecipe extends HttpServlet {
 		RecipeBusi recbus = new RecipeBusi();
 		if(recbus.InitiateOneRecipe() == 1) {
 			recipe.setId(recbus.getMaxId());
-			System.out.println("»ñµÃÊ³Æ×Id:"+recipe.getId());
+			System.out.println("è·å¾—é£Ÿè°±Id:"+recipe.getId());
 		}else {
-			System.out.println("ÉÏ´«Ê³Æ×³õÊ¼»¯Ê§°Ü!");
-			String html = "ÉÏ´«Ê³Æ×³õÊ¼»¯Ê§°Ü£¡<br><a href='recipe_submit.jsp'>ÖØĞÂÉÏ´«</a><br>";
+			System.out.println("ä¸Šä¼ é£Ÿè°±åˆå§‹åŒ–å¤±è´¥!");
+			String html = "ä¸Šä¼ é£Ÿè°±åˆå§‹åŒ–å¤±è´¥ï¼<br><a href='recipe_submit.jsp'>é‡æ–°ä¸Šä¼ </a><br>";
 			response.getWriter().write(html);
 			return;
 		}
@@ -71,32 +71,32 @@ public class uploadRecipe extends HttpServlet {
 		
 		List<String> picUrls = new ArrayList<String>();
 		
-		//ÉÏ´«Í¼Æ¬
+		//ä¸Šä¼ å›¾ç‰‡
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		if(isMultipart) {//ÅĞ¶ÏÇ°Ì¨µÄformÊÇ·ñÓĞmultipartÊôĞÔ
+		if(isMultipart) {//åˆ¤æ–­å‰å°çš„formæ˜¯å¦æœ‰multipartå±æ€§
 //			FileItemFactory factory = new DiskFileItemFactory();
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			ServletFileUpload upload = new ServletFileUpload(factory);
-			//Í¨¹ıparseRequest½âÎöformÖĞµÄËùÓĞÇëÇó×Ö¶Î£¬²¢±£´æµ½items¼¯ºÏÖĞ
+			//é€šè¿‡parseRequestè§£æformä¸­çš„æ‰€æœ‰è¯·æ±‚å­—æ®µï¼Œå¹¶ä¿å­˜åˆ°itemsé›†åˆä¸­
 			try {
-				//ÉèÖÃÉÏ´«ÎÄ¼şÊ±ÓÃµ½µÄÁÙÊ±ÎÄ¼şµÄ´óĞ¡DiskFileItemFactory
-				factory.setSizeThreshold(10485760);//ÉèÖÃÁÙÊ±ÎÄ¼ş»º³åÇø´óĞ¡Îª10MB(µ¥Î»Îª×Ö½ÚB)
-				factory.setRepository(new File("D:\\Course\\Java\\workplace\\Recipe\\uploadtemp"));//ÉèÖÃÁÙÊ±ÎÄ¼şµÄÄ¿Â¼
+				//è®¾ç½®ä¸Šä¼ æ–‡ä»¶æ—¶ç”¨åˆ°çš„ä¸´æ—¶æ–‡ä»¶çš„å¤§å°DiskFileItemFactory
+				factory.setSizeThreshold(10485760);//è®¾ç½®ä¸´æ—¶æ–‡ä»¶ç¼“å†²åŒºå¤§å°ä¸º10MB(å•ä½ä¸ºå­—èŠ‚B)
+				factory.setRepository(new File("D:\\Course\\Java\\workplace\\Recipe\\uploadtemp"));//è®¾ç½®ä¸´æ—¶æ–‡ä»¶çš„ç›®å½•
 				
-				//¿ØÖÆÉÏ´«µ¥¸öÎÄ¼şµÄ´óĞ¡  ´Ë´¦Îª100MB
+				//æ§åˆ¶ä¸Šä¼ å•ä¸ªæ–‡ä»¶çš„å¤§å°  æ­¤å¤„ä¸º100MB
 				upload.setSizeMax(104857600);
 				
 				List<FileItem> items = upload.parseRequest(request);
-				//±éÀúitemsÖĞµÄÊı¾İ(item=XXX)
+				//éå†itemsä¸­çš„æ•°æ®(item=XXX)
 				Iterator<FileItem> iter = items.iterator();
 				int picNo = 0;
 				while(iter.hasNext()) {
 					FileItem item = iter.next();
 					String itemName = item.getFieldName();
-					//ÅĞ¶ÏÇ°Ì¨×Ö¶Î£¬ÊÇÆÕÍ¨form±íµ¥×Ö¶Î£¬»¹ÊÇÎÄ¼ş×Ö¶Î
+					//åˆ¤æ–­å‰å°å­—æ®µï¼Œæ˜¯æ™®é€šformè¡¨å•å­—æ®µï¼Œè¿˜æ˜¯æ–‡ä»¶å­—æ®µ
 					
 					//request.getParameter()   --iter.getString
-					if(item.isFormField()) {//ÆÕÍ¨form±íµ¥×Ö¶ÎÉÏ´«
+					if(item.isFormField()) {//æ™®é€šformè¡¨å•å­—æ®µä¸Šä¼ 
 						if(itemName.equals("recipe_name")) {
 							recipe.setName(item.getString("utf-8"));
 						}else if(itemName.equals("category")) {
@@ -124,39 +124,39 @@ public class uploadRecipe extends HttpServlet {
 							String ingredient_note = item.getString("utf-8");
 							Mquantities.add(ingredient_note);
 						}else {
-							System.out.println("ÆäËü×Ö¶Î");
+							System.out.println("å…¶å®ƒå­—æ®µ");
 						}
 					}else {
 						if(itemName.equals("picture")) {
-							//file ÎÄ¼şÉÏ´«
-							//getFieldNameÊÇ»ñÈ¡ÆÕÍ¨±íµ¥×Ö¶ÎnameÖµ
-							//getNameÊÇ»ñÈ¡ÎÄ¼şÃû
+							//file æ–‡ä»¶ä¸Šä¼ 
+							//getFieldNameæ˜¯è·å–æ™®é€šè¡¨å•å­—æ®µnameå€¼
+							//getNameæ˜¯è·å–æ–‡ä»¶å
 							String fileName = item.getName();
 							
-							//¿ØÖÆÎÄ¼şÀàĞÍ
+							//æ§åˆ¶æ–‡ä»¶ç±»å‹
 							String ext = fileName.substring(fileName.lastIndexOf(".")+1);
 							if(!ext.equals("jpg")) {
-								System.out.println("Í¼Æ¬ÀàĞÍÓĞÎó£¡Í¼Æ¬Ö»ÄÜÊÇjpg");
-								if(recbus.delete(recipe.getId())) {
-									System.out.println("³õÊ¼Ê³Æ×ÒÑ±»É¾³ı£¡");
+								System.out.println("å›¾ç‰‡ç±»å‹æœ‰è¯¯ï¼å›¾ç‰‡åªèƒ½æ˜¯jpg");
+								if(recbus.delete(recipe)) {
+									System.out.println("åˆå§‹é£Ÿè°±å·²è¢«åˆ é™¤ï¼");
 								}else {
-									System.out.println("³õÊ¼Ê³Æ×É¾³ıÊ§°Ü£¡");
+									System.out.println("åˆå§‹é£Ÿè°±åˆ é™¤å¤±è´¥ï¼");
 								}
-								String html = "ÎÄ¼ş£¨´Ë´¦ÎªÍ¼Æ¬£©ÉÏ´«Ê§°Ü£¡<br>Í¼Æ¬ÀàĞÍÓĞÎó£¡Í¼Æ¬Ö»ÄÜÊÇjpg£¡<br><a href='recipe_submit.jsp'>ÖØĞÂÉÏ´«</a><br>";
+								String html = "æ–‡ä»¶ï¼ˆæ­¤å¤„ä¸ºå›¾ç‰‡ï¼‰ä¸Šä¼ å¤±è´¥ï¼<br>å›¾ç‰‡ç±»å‹æœ‰è¯¯ï¼å›¾ç‰‡åªèƒ½æ˜¯jpgï¼<br><a href='recipe_submit.jsp'>é‡æ–°ä¸Šä¼ </a><br>";
 								response.getWriter().write(html);
 								return ;
 							}
 							
 							if(fileName.contains("\\")) {
-		                        //Èç¹û°üº¬Ôò½ØÈ¡×Ö·û´®
+		                        //å¦‚æœåŒ…å«åˆ™æˆªå–å­—ç¬¦ä¸²
 								fileName = fileName.substring(fileName.lastIndexOf("\\")+1);
 		                    }
-							System.out.println("Ô­Ê¼ÎÄ¼şÃû£º"+fileName);
-							//»ñÈ¡ÎÄ¼şÄÚÈİ²¢ÉÏ´«
-							//¶¨ÒåÎÄ¼şÂ·¾¶£ºÖ¸¶¨ÉÏ´«µÄÎ»ÖÃ£¨·şÎñÆ÷Â·¾¶£©£¬ÕâÀï·Åµ½workplaceÏÂ±¾¹¤³ÌµÄÒ»¸öÎÄ¼ş¼Ğ
+							System.out.println("åŸå§‹æ–‡ä»¶åï¼š"+fileName);
+							//è·å–æ–‡ä»¶å†…å®¹å¹¶ä¸Šä¼ 
+							//å®šä¹‰æ–‡ä»¶è·¯å¾„ï¼šæŒ‡å®šä¸Šä¼ çš„ä½ç½®ï¼ˆæœåŠ¡å™¨è·¯å¾„ï¼‰ï¼Œè¿™é‡Œæ”¾åˆ°workplaceä¸‹æœ¬å·¥ç¨‹çš„ä¸€ä¸ªæ–‡ä»¶å¤¹
 							String path = "D:\\Course\\Java\\workplace\\Recipe\\WebContent\\upload\\recipe\\picture";
-							System.out.println("ÎÄ¼ş±£´æÂ·¾¶£º"+path);
-							//»ñÈ¡²»°üº¬Â·¾¶µÄÎÄ¼şÃû
+							System.out.println("æ–‡ä»¶ä¿å­˜è·¯å¾„ï¼š"+path);
+							//è·å–ä¸åŒ…å«è·¯å¾„çš„æ–‡ä»¶å
 							ext = fileName.substring(fileName.lastIndexOf("."));
 							fileName = "recipePhoto-"+recipe.getId()+"-"+picNo+ext;
 							picNo++;
@@ -164,19 +164,19 @@ public class uploadRecipe extends HttpServlet {
 							picUrls.add(fileName);
 							
 							File file = new File(path,fileName);
-							item.write(file);//ÉÏ´«
-							System.out.println(fileName+"ÉÏ´«³É¹¦£¡");
+							item.write(file);//ä¸Šä¼ 
+							System.out.println(fileName+"ä¸Šä¼ æˆåŠŸï¼");
 						}
 					}
 				}
 			} catch(FileUploadBase.SizeLimitExceededException e) {
-				System.out.println("ÉÏ´«ÎÄ¼ş´óĞ¡³¬¹ıÏŞÖÆ£¡×î´ó100MB");
-				if(recbus.delete(recipe.getId())) {
-					System.out.println("³õÊ¼Ê³Æ×ÒÑ±»É¾³ı£¡");
+				System.out.println("ä¸Šä¼ æ–‡ä»¶å¤§å°è¶…è¿‡é™åˆ¶ï¼æœ€å¤§100MB");
+				if(recbus.delete(recipe)) {
+					System.out.println("åˆå§‹é£Ÿè°±å·²è¢«åˆ é™¤ï¼");
 				}else {
-					System.out.println("³õÊ¼Ê³Æ×É¾³ıÊ§°Ü£¡");
+					System.out.println("åˆå§‹é£Ÿè°±åˆ é™¤å¤±è´¥ï¼");
 				}
-				String html = "ÎÄ¼ş£¨´Ë´¦ÎªÍ¼Æ¬£©ÉÏ´«Ê§°Ü£¡<br>ÉÏ´«ÎÄ¼ş´óĞ¡³¬¹ıÏŞÖÆ£¡×î´ó100MB!<br><a href='recipe_submit.jsp'>ÖØĞÂÉÏ´«</a><br>";
+				String html = "æ–‡ä»¶ï¼ˆæ­¤å¤„ä¸ºå›¾ç‰‡ï¼‰ä¸Šä¼ å¤±è´¥ï¼<br>ä¸Šä¼ æ–‡ä»¶å¤§å°è¶…è¿‡é™åˆ¶ï¼æœ€å¤§100MB!<br><a href='recipe_submit.jsp'>é‡æ–°ä¸Šä¼ </a><br>";
 				response.getWriter().write(html);
 				return;
 			} catch (FileUploadException e) {
@@ -187,14 +187,14 @@ public class uploadRecipe extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else {
-			System.out.println("Ç°Ì¨µÄformÎŞmultipartÊôĞÔ£¡");
-			System.out.println("Ê³Æ×ÉÏ´«Ê§°Ü£¡");
-			if(recbus.delete(recipe.getId())) {
-				System.out.println("³õÊ¼Ê³Æ×ÒÑ±»É¾³ı£¡");
+			System.out.println("å‰å°çš„formæ— multipartå±æ€§ï¼");
+			System.out.println("é£Ÿè°±ä¸Šä¼ å¤±è´¥ï¼");
+			if(recbus.delete(recipe)) {
+				System.out.println("åˆå§‹é£Ÿè°±å·²è¢«åˆ é™¤ï¼");
 			}else {
-				System.out.println("³õÊ¼Ê³Æ×É¾³ıÊ§°Ü£¡");
+				System.out.println("åˆå§‹é£Ÿè°±åˆ é™¤å¤±è´¥ï¼");
 			}
-			String html = "Ê³Æ×ÉÏ´«Ê§°Ü£¡<br>Ç°Ì¨µÄformÎŞmultipartÊôĞÔ£¡<br><a href='recipe_submit.jsp'>ÖØĞÂÉÏ´«</a><br>";
+			String html = "é£Ÿè°±ä¸Šä¼ å¤±è´¥ï¼<br>å‰å°çš„formæ— multipartå±æ€§ï¼<br><a href='recipe_submit.jsp'>é‡æ–°ä¸Šä¼ </a><br>";
 			response.getWriter().write(html);
 			return ;
 		}
@@ -204,25 +204,25 @@ public class uploadRecipe extends HttpServlet {
 		PictureBusi picbus = new PictureBusi();
 		int i = 0;
 		
-		//ÉÏ´«Ê³Æ×»ù±¾ĞÅÏ¢
+		//ä¸Šä¼ é£Ÿè°±åŸºæœ¬ä¿¡æ¯
 		
 		recipe.setAuthor(((User)request.getSession().getAttribute("user")).getId());
 		
 		result = recbus.upload(recipe);
 		if(result == 1) {
-			System.out.println("Ê³Æ×»ù±¾ĞÅÏ¢ÉÏ´«³É¹¦£¡");
+			System.out.println("é£Ÿè°±åŸºæœ¬ä¿¡æ¯ä¸Šä¼ æˆåŠŸï¼");
 		}else {
-			if(recbus.delete(recipe.getId())) {
-				System.out.println("³õÊ¼Ê³Æ×ÒÑ±»É¾³ı£¡");
+			if(recbus.delete(recipe)) {
+				System.out.println("åˆå§‹é£Ÿè°±å·²è¢«åˆ é™¤ï¼");
 			}else {
-				System.out.println("³õÊ¼Ê³Æ×É¾³ıÊ§°Ü£¡");
+				System.out.println("åˆå§‹é£Ÿè°±åˆ é™¤å¤±è´¥ï¼");
 			}
-			String html = "Ê³Æ×»ù±¾ĞÅÏ¢ÉÏ´«Ê§°Ü£¡<br><a href='recipe_submit.jsp'>ÖØĞÂÉÏ´«</a><br>";
+			String html = "é£Ÿè°±åŸºæœ¬ä¿¡æ¯ä¸Šä¼ å¤±è´¥ï¼<br><a href='recipe_submit.jsp'>é‡æ–°ä¸Šä¼ </a><br>";
 			response.getWriter().write(html);
 			return ;
 		}
 		
-		//ÉÏ´«²½Öè
+		//ä¸Šä¼ æ­¥éª¤
 		Iterator<Step> listStep = steps.iterator();
 		Step step = new Step();
 		i = 0;
@@ -234,20 +234,20 @@ public class uploadRecipe extends HttpServlet {
 			i++;
 			result = stebus.upload(step);
 			if(result == 1) {
-				System.out.println("²½Öè  "+i+"  ÉÏ´«³É¹¦£¡");
+				System.out.println("æ­¥éª¤  "+i+"  ä¸Šä¼ æˆåŠŸï¼");
 			}else {
-				if(recbus.delete(recipe.getId())) {
-					System.out.println("³õÊ¼Ê³Æ×ÒÑ±»É¾³ı£¡");
+				if(recbus.delete(recipe)) {
+					System.out.println("åˆå§‹é£Ÿè°±å·²è¢«åˆ é™¤ï¼");
 				}else {
-					System.out.println("³õÊ¼Ê³Æ×É¾³ıÊ§°Ü£¡");
+					System.out.println("åˆå§‹é£Ÿè°±åˆ é™¤å¤±è´¥ï¼");
 				}
-				String html = "²½ÖèÉÏ´«Ê§°Ü£¡<br><a href='recipe_submit.jsp'>ÖØĞÂÉÏ´«</a><br>";
+				String html = "æ­¥éª¤ä¸Šä¼ å¤±è´¥ï¼<br><a href='recipe_submit.jsp'>é‡æ–°ä¸Šä¼ </a><br>";
 				response.getWriter().write(html);
 				return ;
 			}
 		}
 		
-		//ÉÏ´«Ê³²Ä
+		//ä¸Šä¼ é£Ÿæ
 		Iterator<String> listMate = materials.iterator();
 		Iterator<String> Mquantity = Mquantities.iterator();
 		Include include = new Include();
@@ -258,20 +258,20 @@ public class uploadRecipe extends HttpServlet {
 			include.setQuantity(Mquantity.next());
 			result = incbus.upload(include);
 			if(result == 1) {
-				System.out.println("Ê³²Ä  "+include.getMaterial()+"  ÉÏ´«³É¹¦£¡");
+				System.out.println("é£Ÿæ  "+include.getMaterial()+"  ä¸Šä¼ æˆåŠŸï¼");
 			}else {
-				if(recbus.delete(recipe.getId())) {
-					System.out.println("³õÊ¼Ê³Æ×ÒÑ±»É¾³ı£¡");
+				if(recbus.delete(recipe)) {
+					System.out.println("åˆå§‹é£Ÿè°±å·²è¢«åˆ é™¤ï¼");
 				}else {
-					System.out.println("³õÊ¼Ê³Æ×É¾³ıÊ§°Ü£¡");
+					System.out.println("åˆå§‹é£Ÿè°±åˆ é™¤å¤±è´¥ï¼");
 				}
-				String html = "Ê³²ÄÉÏ´«Ê§°Ü£¡<br><a href='recipe_submit.jsp'>ÖØĞÂÉÏ´«</a><br>";
+				String html = "é£Ÿæä¸Šä¼ å¤±è´¥ï¼<br><a href='recipe_submit.jsp'>é‡æ–°ä¸Šä¼ </a><br>";
 				response.getWriter().write(html);
 				return ;
 			}
 		}
 		
-		//ÉÏ´«Í¼Æ¬
+		//ä¸Šä¼ å›¾ç‰‡
 		Iterator<String> listPic = picUrls.iterator();
 		Picture picture = new Picture();
 		i = 0;
@@ -283,20 +283,20 @@ public class uploadRecipe extends HttpServlet {
 			picture.setUrl("upload/recipe/picture/"+listPic.next());
 			result = picbus.upload(picture);
 			if(result == 1) {
-				System.out.println("Í¼Æ¬  "+picture.getNumber()+"  Â¼ÈëÊı¾İ¿â³É¹¦£¡");
+				System.out.println("å›¾ç‰‡  "+picture.getNumber()+"  å½•å…¥æ•°æ®åº“æˆåŠŸï¼");
 			}else {
-				if(recbus.delete(recipe.getId())) {
-					System.out.println("³õÊ¼Ê³Æ×ÒÑ±»É¾³ı£¡");
+				if(recbus.delete(recipe)) {
+					System.out.println("åˆå§‹é£Ÿè°±å·²è¢«åˆ é™¤ï¼");
 				}else {
-					System.out.println("³õÊ¼Ê³Æ×É¾³ıÊ§°Ü£¡");
+					System.out.println("åˆå§‹é£Ÿè°±åˆ é™¤å¤±è´¥ï¼");
 				}
-				String html = "Í¼Æ¬Â¼ÈëÊı¾İ¿âÊ§°Ü£¡<br><a href='recipe_submit.jsp'>ÖØĞÂÉÏ´«</a><br>";
+				String html = "å›¾ç‰‡å½•å…¥æ•°æ®åº“å¤±è´¥ï¼<br><a href='recipe_submit.jsp'>é‡æ–°ä¸Šä¼ </a><br>";
 				response.getWriter().write(html);
 				return;
 			}
 		}
 		
-		String html = "ÄúµÄÊ³Æ×ÉÏ´«³É¹¦£¡ÇëÄÍĞÄµÈ´ıÉóºË...<br><a href='recipe_submit.jsp'>·µ»ØÉÏ´«Ò³Ãæ</a><br>";
+		String html = "æ‚¨çš„é£Ÿè°±ä¸Šä¼ æˆåŠŸï¼è¯·è€å¿ƒç­‰å¾…å®¡æ ¸...<br><a href='recipe_submit.jsp'>è¿”å›ä¸Šä¼ é¡µé¢</a><br>";
 		response.getWriter().write(html);
 	}
 
