@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.StepMapper">
+	
+	<select id="selectStepByRecipeId" parameterType="Recipe"
+		resultType="Step">
+		select sequence,description,picture from step where recipe = #{id}
+	</select>
+	
+	<insert id="insertStep" parameterType="Step">
+		insert into step (recipe,sequence,description)
+		values(#{recipe},#{sequence},#{description})
+	</insert>
+	
+</mapper>

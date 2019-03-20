@@ -56,7 +56,7 @@ public class LoginAct extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(rs == 1) {
-			user = userbusi.getAllInfo(user.getId());
+			user = userbusi.getAllInfo(user);
 			HttpSession session=request.getSession();
 			session.setAttribute("user", user);
 			

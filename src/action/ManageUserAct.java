@@ -2,12 +2,16 @@ package action;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.github.pagehelper.PageInfo;
 
 import business.manageUserBusi;
 import entity.User;
@@ -35,30 +39,43 @@ public class ManageUserAct extends HttpServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		int page=1;
 		int pagesize = 2;
-		int recordcount = 0;
+//		int recordcount = 0;
 		int pagecount = 0;
 		manageUserBusi mub = new manageUserBusi();
-		User userlist[] = null;
+		User users[] = new User[2];
+		
 		
 		//读取客户端传递过来的要显示的页码
 		if(request.getParameter("page")!=null){
 			page=Integer.parseInt(request.getParameter("page"));
 		}
 		
-		try {
+/*		try {
 			recordcount = mub.getUserCount();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
-		pagecount = recordcount/pagesize+(recordcount%pagesize==0?0:1);
+//		pagecount = recordcount/pagesize+(recordcount%pagesize==0?0:1);
+		
+		
+		PageInfo<User> pageInfo = new PageInfo<User>();
 		
 		try {
-			userlist = mub.getUserList(page, pagesize);
-		} catch (SQLException e) {
+			pageInfo = mub.getUserList(page, pagesize);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+
+		page = pageInfo.getPageNum();
+		pagecount = pageInfo.getPages();
+		List<User> userlist = pageInfo.getList();
+		Iterator<User> user = userlist.iterator();
+		int i = 0;
+		while(user.hasNext()) {
+			users[i] = user.next();
 		}
 		// 传递总页数及当前页至user.jsp页面
 		request.setAttribute("page", page);

@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import com.util.MybatisUtils;
+
 import dao.DAO;
 import entity.Picture;
 import entity.Recipe;
@@ -22,7 +26,7 @@ public class PictureBusi {
 	
 	public List<Picture> getPicture(Recipe recipe){
 		List<Picture> list = new ArrayList<Picture>();
-		a = new Object[1];
+/*		a = new Object[1];
 		sql="select number,url from r_picture where recipe = ? ;";
 		a[0] = recipe.getId();
 		try {
@@ -39,6 +43,13 @@ public class PictureBusi {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}*/
+		
+		SqlSession sqlSession = MybatisUtils.getSession();
+		try {
+			list = sqlSession.selectList("mapper.PictureMapper.selectPictureByRecipeId",recipe);
+		}finally {
+			sqlSession.close();
 		}
 		
 		return list;
@@ -46,7 +57,7 @@ public class PictureBusi {
 	
 	public int upload(Picture picture) {
 		int r = 0;
-		sql = "insert into r_picture (recipe,number,url) value(?,?,?) ;";
+/*		sql = "insert into r_picture (recipe,number,url) value(?,?,?) ;";
 		a = new Object[3];
 		a[0] = picture.getRecipe();
 		a[1] = picture.getNumber();
@@ -60,7 +71,20 @@ public class PictureBusi {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		r = rs_2;
+		r = rs_2;*/
+		
+		SqlSession sqlSession = MybatisUtils.getSession();
+		try {
+			r = sqlSession.insert("mapper.PictureMapper.insertPicture",picture);
+			if(r == 1){
+		        System.out.println("您成功插入了 "+r+" 张图片！");
+		        sqlSession.commit();
+		    }else{
+		        System.out.println("执行插入图片操作失败！！！");
+		    }
+		}finally {
+			sqlSession.close();
+		}
 		
 		return r;
 	}

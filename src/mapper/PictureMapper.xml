@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.PictureMapper">
+	
+	<select id="selectPictureByRecipeId" parameterType="Recipe"
+		resultType="Picture">
+		select number,url from r_picture where recipe = #{id}
+	</select>
+	
+	<insert id="insertPicture" parameterType="Picture">
+		insert into r_picture (recipe,number,url)
+		values(#{recipe},#{number},#{url})
+	</insert>
+	
+</mapper>
