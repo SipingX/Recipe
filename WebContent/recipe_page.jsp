@@ -143,7 +143,7 @@
 
 <!-- Recipe Background -->
 <div class="recipeBackground">
-<%
+<%-- <%
 	while (picList.hasNext()) {
 		picture = picList.next();
 		System.out.println("图片从数据库获取地址："+picture.getUrl());
@@ -153,7 +153,8 @@
 <%
 		break;
 	}
-%>
+%> --%>
+	<img src="images/recipeBackground.jpg" alt="" />
 </div>
 
 <!-- Content
@@ -182,8 +183,8 @@
 		<%
 			while (picList.hasNext()) {
 				picture = picList.next();
-				if(c == 1){
-					c = 2;
+				if(c < 3){
+					c++;
 					continue;
 				}
 		%>

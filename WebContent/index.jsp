@@ -352,7 +352,7 @@
 						<!-- Thumbnail -->
 						<div class="thumbnail-holder">
 							<a href="getRecipePageAct?recipeId=<%= latest_recipe.getId() %>">
-								<img src="<%= latest_recipe.getPictures(1) %>" alt="" />
+								<img src="<%= latest_recipe.getPictures(2) %>" alt="" />
 								<div class="hover-cover"></div>
 								<div class="hover-icon">查看食谱</div>
 							</a>
