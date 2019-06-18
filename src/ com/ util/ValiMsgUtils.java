@@ -16,10 +16,10 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class ValiMsgUtils {
 
 	//璐﹀彿
-	public static final String ACCOUNT_SID = "15b9d507e5804208be4ab302d47f47d6";
+	public static final String ACCOUNT_SID = "";
 
 	//TOKEN
-	public static final String AUTH_TOKEN = "cc57e9b935cf422c9b8f3e2c0dd18207";
+	public static final String AUTH_TOKEN = "";
 	
 	//绛惧悕
 	public static final String SIGNATURE = "WebApp";
